@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,8 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
+ 
+ //fondo del login
  Widget  _fondoApp() {
 
    final gradiente = Container(
@@ -129,11 +131,13 @@ class _LoginState extends State<Login> {
    );
  }
 
+ //formulario de inicio de secion
  Widget _formulario() {
 
    final contenedor = Container(
-     margin: EdgeInsets.only(top: 20.0,left: 30.0),
-     width: 300.0,
+     margin: EdgeInsets.only(top: 20.0,left: 15.0),
+     padding: EdgeInsets.only(right: 10.0,left: 10.0) ,
+     width: 330.0,
      height: 500.0,
      decoration: BoxDecoration(
        borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0),
@@ -162,7 +166,15 @@ class _LoginState extends State<Login> {
           SizedBox(height: 20.0,width: double.infinity),
          _passTexto(),
           SizedBox(height: 40.0,width: double.infinity),
-         crearBoton()
+         _crearBoton(),
+          SizedBox(height: 10.0,width: double.infinity),
+            _googleBotton(), 
+            // SizedBox(width: 100.0),
+           _facebookBotton()
+         
+         
+
+
 
 
        ],
@@ -175,7 +187,7 @@ class _LoginState extends State<Login> {
      ],
    );
  }
-
+  //formulario de registro
   Widget _formularioRegistro() {
 
    final contenedor = Container(
@@ -204,6 +216,7 @@ class _LoginState extends State<Login> {
    );
  }
 
+  //input Correo
   Widget _correoTexto() {
   return TextField(
     //autofocus: true,
@@ -221,6 +234,8 @@ class _LoginState extends State<Login> {
     ),
   );
  }
+
+ //Input contrasena
  Widget _passTexto() {
   return TextField(
     //autofocus: true,
@@ -238,16 +253,63 @@ class _LoginState extends State<Login> {
     ),
   );
   }
-  
-  Widget crearBoton() {
-    return RaisedButton(
-      child: Text(
-        'Agregar Evento',
-        style: TextStyle(color: Colors.white),
-      ),
-      color: Colors.orangeAccent,
-      onPressed: (
-      ) {},
-    );
+
+
+
+
+
+//BOTONES
+
+
+  //Boton de iniciar secion
+  Widget _crearBoton() {
+    return  RaisedButton(
+      padding: EdgeInsets.only(left: 35.0,right: 35.0),
+        shape:  RoundedRectangleBorder(
+            borderRadius:  BorderRadius.circular(18.0),
+            side: BorderSide(color: Colors.orangeAccent)),
+        onPressed: () {
+            Navigator.pushNamed(context, 'Menu');
+        },
+        color: Colors.white,
+        textColor: Colors.orangeAccent,
+        child: Text("Iniciar".toUpperCase(),
+            style: TextStyle(fontSize: 20)),
+      );
   }
+
+ Widget _googleBotton() {
+   return GoogleSignInButton(
+     onPressed: () {},
+     borderRadius:50.0 ,
+     );
+ }
+
+ Widget _facebookBotton(){
+   return FacebookSignInButton(
+     onPressed: () {}
+   ,borderRadius:50.0 ,
+  //  text: "FACEBOOK",
+   );
+  //  return Go
+  // return   FlatButton(
+  //     shape: new RoundedRectangleBorder(
+  //           borderRadius: new BorderRadius.circular(18.0),
+  //           side: BorderSide(color: Colors.red)),
+  //       color: Colors.white,
+  //       textColor: Colors.red,
+  //       padding: EdgeInsets.all(0.0),
+        
+  //       onPressed: () {},
+  //       child: Text(
+  //         "F".toUpperCase(),
+  //         style: TextStyle(
+  //           fontSize: 14.0,
+  //         ),
+  //       ),
+  // );
 }
+
+}
+
+

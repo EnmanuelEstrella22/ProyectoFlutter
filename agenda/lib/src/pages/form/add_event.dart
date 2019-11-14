@@ -287,7 +287,7 @@ class _EventosState extends State<Eventos> {
         ),
       ),
       onPressed: () {
-        Navigator.pushNamed(context, '/');
+        Navigator.pop(context);
       },
     );
   }

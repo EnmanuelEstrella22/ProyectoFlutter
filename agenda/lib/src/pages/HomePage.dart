@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
           ),
           onPressed: () {
             // Navigator.pushNamed(context, 'FormEvent');
-            Navigator.pushNamed(context, 'Login');
+            Navigator.pushNamed(context, 'FormEvent');
 
           },
         ));

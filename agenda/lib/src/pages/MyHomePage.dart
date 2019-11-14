@@ -25,10 +25,9 @@ class MyApp extends StatelessWidget {
       ],
       initialRoute: '/',
         routes:{
-        '/' : (BuildContext contex) => HomePage(),
+        '/' : (BuildContext contex) => Login(),
+        'Menu' : (BuildContext contex) => HomePage(),
         'FormEvent' : (BuildContext contex) => Eventos(),
-        'Login' : (BuildContext contex) => Login()
-
       },
 
     );
