@@ -58,12 +58,16 @@ class _EventosState extends State<Eventos> {
       controller: usernameController,
       enableInteractiveSelection: false,
       decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0)
+            ),
           labelText: 'Fecha del evento',
           labelStyle: estilo,
           hintText: 'Escribe aqui',
           icon: Icon(Icons.calendar_today, color: Colors.orange),
-          focusColor: Colors.orange),
+          
+          // focusColor: Colors.orange
+          ),
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
         _selectDate(context);

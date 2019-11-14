@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'HomePage.dart';
+import 'Login.dart';
 import 'form/add_event.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
        localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+        // GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
         const Locale('en', 'US'), // English
@@ -25,7 +26,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
         routes:{
         '/' : (BuildContext contex) => HomePage(),
-        'FormEvent' : (BuildContext contex) => Eventos()
+        'FormEvent' : (BuildContext contex) => Eventos(),
+        'Login' : (BuildContext contex) => Login()
+
       },
 
     );
