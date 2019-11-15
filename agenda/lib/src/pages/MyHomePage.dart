@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'HomePage.dart';
+import 'ListEvent.dart';
 import 'Login.dart';
 import 'form/add_event.dart';
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/' : (BuildContext contex) => Login(),
         'Menu' : (BuildContext contex) => HomePage(),
         'FormEvent' : (BuildContext contex) => Eventos(),
+        'ListadoEvent' : (BuildContext contex) => SchoolList()
       },
 
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ListEvent.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            // Navigator.pushNamed(context, 'FormEvent');
             Navigator.pushNamed(context, 'FormEvent');
 
           },
@@ -82,46 +83,48 @@ class HomePage extends StatelessWidget {
   }
 
   Widget contenido() {
-    return Container(
-      child: Center(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              title: Text('hola'),
-            ),
+    return SchoolList();
+    // return Container(
+    //   child: SchoolList(),
+      // child: Center(
+      //   child: ListView(
+      //     children: <Widget>[
+      //       ListTile(
+      //         title: Text('hola'),
+      //       ),
             
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-            Text('hola'),
-          ],
-        ),
-      ),
-      decoration: BoxDecoration(
-          // shape: BoxShape.circle,
-          gradient: LinearGradient(
-              colors: [Colors.black12, Colors.transparent, Colors.black12]),
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
-      margin: EdgeInsets.only(top: 20.0),
-    );
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //       Text('hola'),
+      //     ],
+      //   ),
+      // ),
+    //   decoration: BoxDecoration(
+    //       // shape: BoxShape.circle,
+    //       gradient: LinearGradient(
+    //           colors: [Colors.black12, Colors.transparent, Colors.black12]),
+    //       borderRadius: BorderRadius.only(
+    //           topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
+    //   margin: EdgeInsets.only(top: 20.0),
+    // );
   }
 }
 
