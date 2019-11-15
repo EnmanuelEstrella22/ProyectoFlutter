@@ -11,6 +11,14 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   final TextStyle estilo = new TextStyle(fontSize: 20.0);
+  final _formKeyLogin = GlobalKey<FormState>();
+  final _formKeyRegister = GlobalKey<FormState>();
+  final controllerLoginc1= TextEditingController();
+  final controllerLoginc2= TextEditingController();
+  final controllerRegister1= TextEditingController();
+  final controllerRegister2= TextEditingController();
+  final controllerRegister3= TextEditingController();
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,16 +166,23 @@ class _LoginState extends State<Login> {
                 fontSize: 25.0,
                 fontWeight: FontWeight.normal),
           ),
-          SizedBox(height: 40.0, width: double.infinity),
-          _correoTexto(),
-          SizedBox(height: 20.0, width: double.infinity),
-          _passTexto(),
-          SizedBox(height: 40.0, width: double.infinity),
-          _crearBoton(),
-          SizedBox(height: 10.0, width: double.infinity),
-          _googleBotton(),
-          // SizedBox(width: 100.0),
-          _facebookBotton()
+          Form(
+            key: _formKeyLogin,
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 40.0, width: double.infinity),
+                _correoTexto(),
+                SizedBox(height: 20.0, width: double.infinity),
+                _passTexto(),
+                SizedBox(height: 40.0, width: double.infinity),
+                _crearBoton(),
+                SizedBox(height: 10.0, width: double.infinity),
+                _googleBotton(),
+                // SizedBox(width: 100.0),
+                _facebookBotton()
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -182,7 +197,7 @@ class _LoginState extends State<Login> {
   //formulario de registro
   Widget _formularioRegistro() {
     final contenedor = Container(
-      margin: EdgeInsets.only(top: 20.0, left: 15.0,bottom: 30.0),
+      margin: EdgeInsets.only(top: 20.0, left: 15.0, bottom: 30.0),
       padding: EdgeInsets.only(right: 10.0, left: 10.0),
       width: 330.0,
       height: 500.0,
@@ -216,15 +231,21 @@ class _LoginState extends State<Login> {
                 fontSize: 25.0,
                 fontWeight: FontWeight.normal),
           ),
-          SizedBox(height: 40.0, width: double.infinity),
-          _correoTexto(),
-          SizedBox(height: 20.0, width: double.infinity),
-          _passTexto(),
-          SizedBox(height: 20.0, width: double.infinity),
-          _passTextoConfir(),
-          SizedBox(height: 40.0, width: double.infinity),
-          _crearBotonRegis(),
-
+          Form(
+            key: _formKeyRegister,
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 40.0, width: double.infinity),
+                _correoTexto(),
+                SizedBox(height: 20.0, width: double.infinity),
+                _passTexto(),
+                SizedBox(height: 20.0, width: double.infinity),
+                _passTextoConfir(),
+                SizedBox(height: 40.0, width: double.infinity),
+                _crearBotonRegis(),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -236,13 +257,20 @@ class _LoginState extends State<Login> {
 
   //input Correo
   Widget _correoTexto() {
-    return TextField(
+    return TextFormField(
+      
+      controller: controllerLoginc1,
+              validator: (value) {
+                return value.isEmpty
+                    ? 'Campos incorrectos o vacios'
+                    : null;
+              },
       keyboardType: TextInputType.emailAddress,
       cursorColor: Colors.orangeAccent,
       cursorRadius: Radius.circular(5.0),
       cursorWidth: 3.0,
       decoration: InputDecoration(
-         prefixIcon: Icon(
+        prefixIcon: Icon(
           Icons.account_circle,
           color: Colors.orange,
           size: 35.0,
@@ -251,14 +279,19 @@ class _LoginState extends State<Login> {
         labelText: 'Correo',
         labelStyle: estilo,
         hintText: 'Escribe aqui',
-       
       ),
     );
   }
 
   //Input contrasena
   Widget _passTexto() {
-    return TextField(
+    return TextFormField(
+      controller: controllerLoginc2,
+              validator: (value) {
+                return value.isEmpty
+                    ? 'Campos incorrectos o vacios'
+                    : null;
+              },
       cursorColor: Colors.orangeAccent,
       cursorRadius: Radius.circular(5.0),
       cursorWidth: 3.0,
@@ -277,9 +310,16 @@ class _LoginState extends State<Login> {
     );
   }
 
- //Confirmar clave
+  //Confirmar clave
   Widget _passTextoConfir() {
-    return TextField(
+    return TextFormField(
+      controller: controllerRegister3,
+              validator: (value) {
+                return value.isEmpty
+                    ? 'Campos incorrectos o vacios'
+                    : null;
+              },
+      
       cursorColor: Colors.orangeAccent,
       cursorRadius: Radius.circular(5.0),
       cursorWidth: 3.0,
@@ -308,7 +348,11 @@ class _LoginState extends State<Login> {
           borderRadius: BorderRadius.circular(18.0),
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
-        Navigator.pushNamed(context, 'Menu');
+        if (_formKeyLogin.currentState.validate()) {
+          Navigator.pushNamed(context, 'Menu');
+
+        }
+        
       },
       color: Colors.white,
       textColor: Colors.orangeAccent,
@@ -317,14 +361,18 @@ class _LoginState extends State<Login> {
   }
 
   //Boton Registrarte
-    Widget _crearBotonRegis() {
+  Widget _crearBotonRegis() {
     return RaisedButton(
       padding: EdgeInsets.only(left: 35.0, right: 35.0),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18.0),
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
-        Navigator.pushNamed(context, 'Menu');
+        if (_formKeyRegister.currentState.validate()){
+          Navigator.pushNamed(context, 'Menu');
+
+        }
+        
       },
       color: Colors.white,
       textColor: Colors.orangeAccent,

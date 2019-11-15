@@ -7,13 +7,13 @@ class Eventos extends StatefulWidget {
 }
 
 //final _formKey = GlobalKey<FormState>();
-final usernameController = TextEditingController();
+final usernameControllerHora = TextEditingController();
 final usernameControllerNombre = TextEditingController();
 final usernameControllerDesp = TextEditingController();
 final usernameControllerTime = TextEditingController();
 final TextStyle estilo = new TextStyle(fontSize: 20.0);
+ final _formKey = GlobalKey<FormState>();
 String _fecha = '';
-String _hora = '';
 String _alert='';
 
 var _datos = ['Evento', 'Tarea', 'No Olvidar'];
@@ -37,7 +37,13 @@ class _EventosState extends State<Eventos> {
   }
 
   Widget _cajaTexto() {
-    return TextField(
+    return TextFormField(
+      //key: _formKey,
+      validator: (value) {
+                return value.isEmpty
+                    ? 'El evento debe de llevar un nombre'
+                    : null;
+              },
       //autofocus: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -54,8 +60,13 @@ class _EventosState extends State<Eventos> {
   }
 
   Widget _crearDate(BuildContext context) {
-    return TextField(
-      controller: usernameController,
+    return TextFormField(
+       validator: (value) {
+                return value.isEmpty
+                    ? 'No hay fecha seleccionada'
+                    : null;
+              },
+      controller: usernameControllerHora,
       enableInteractiveSelection: false,
       decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -87,13 +98,18 @@ class _EventosState extends State<Eventos> {
       setState(() {
         DateFormat format = new DateFormat.yMd();
         _fecha = format.format(picked);
-        usernameController.text = _fecha;
+        usernameControllerHora.text = _fecha;
       });
     }
   }
 
   Widget _crearTextHora() {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+                return value.isEmpty
+                    ? 'No hay fecha seleccionada'
+                    : null;
+              },
       //autofocus: true,
       controller: usernameControllerTime,
       enableInteractiveSelection: false,
@@ -120,18 +136,27 @@ class _EventosState extends State<Eventos> {
       initialTime: TimeOfDay.now(),
       context: context,
     );
-
+    TimeOfDay hr;
     if (selectedTime != null) {
       setState(() {
-        usernameControllerTime.text = selectedTime.hour.toString() +
-            selectedTime.minute.toString() +
-            selectedTime.hourOfPeriod.toString();
+
+        hr=selectedTime.replacing(hour: selectedTime.hourOfPeriod);
+        usernameControllerTime.text = hr.format(context);
+        
+        //  selectedTime.hour.toString() +
+        //     selectedTime.minute.toString() +
+        //     selectedTime.hourOfPeriod.toString();
       });
     }
   }
 
   Widget _cajaDesc() {
-    return TextField(
+    return TextFormField(
+      // validator: (value) {
+      //           return value.isEmpty
+      //               ? 'Ningun apunte'
+      //               : null;
+      //         },
       //autofocus: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -223,6 +248,7 @@ class _EventosState extends State<Eventos> {
             child: Column(
               children: <Widget>[
                 Form(
+                  key: _formKey,
                   child: Column(
                     children: <Widget>[
                       Text(_alert),
@@ -266,11 +292,12 @@ class _EventosState extends State<Eventos> {
         style: TextStyle(color: Colors.white),
       ),
       color: Color.fromRGBO(255, 69, 0, 1.0),
-      onPressed: (
-        // ayer la apague
-        
+      onPressed: () {
 
-      ) {},
+        if (_formKey.currentState.validate()) {
+
+        }
+      },
     );
   }
 

@@ -119,10 +119,10 @@ class _SchoolListState extends State<SchoolList> {
                           color: Colors.white,
                         ),
                       ),
-                      Text(
-                        "Eventos",
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      ),
+                      // Text(
+                      //   "Eventos",
+                      //   style: TextStyle(color: Colors.white, fontSize: 24),
+                      // ),
                       IconButton(
                         onPressed: () {},
                         icon: Icon(
