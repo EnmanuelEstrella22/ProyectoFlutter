@@ -13,12 +13,11 @@ class _LoginState extends State<Login> {
   final TextStyle estilo = new TextStyle(fontSize: 20.0);
   final _formKeyLogin = GlobalKey<FormState>();
   final _formKeyRegister = GlobalKey<FormState>();
-  final controllerLoginc1= TextEditingController();
-  final controllerLoginc2= TextEditingController();
-  final controllerRegister1= TextEditingController();
-  final controllerRegister2= TextEditingController();
-  final controllerRegister3= TextEditingController();
-
+  final controllerLoginc1 = TextEditingController();
+  final controllerLoginc2 = TextEditingController();
+  final controllerRegister1 = TextEditingController();
+  final controllerRegister2 = TextEditingController();
+  final controllerRegister3 = TextEditingController();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -236,9 +235,9 @@ class _LoginState extends State<Login> {
             child: Column(
               children: <Widget>[
                 SizedBox(height: 40.0, width: double.infinity),
-                _correoTexto(),
+                _correoTexto2(),
                 SizedBox(height: 20.0, width: double.infinity),
-                _passTexto(),
+                _passTexto2(),
                 SizedBox(height: 20.0, width: double.infinity),
                 _passTextoConfir(),
                 SizedBox(height: 40.0, width: double.infinity),
@@ -258,13 +257,10 @@ class _LoginState extends State<Login> {
   //input Correo
   Widget _correoTexto() {
     return TextFormField(
-      
       controller: controllerLoginc1,
-              validator: (value) {
-                return value.isEmpty
-                    ? 'Campos incorrectos o vacios'
-                    : null;
-              },
+      validator: (value) {
+        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+      },
       keyboardType: TextInputType.emailAddress,
       cursorColor: Colors.orangeAccent,
       cursorRadius: Radius.circular(5.0),
@@ -287,11 +283,9 @@ class _LoginState extends State<Login> {
   Widget _passTexto() {
     return TextFormField(
       controller: controllerLoginc2,
-              validator: (value) {
-                return value.isEmpty
-                    ? 'Campos incorrectos o vacios'
-                    : null;
-              },
+      validator: (value) {
+        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+      },
       cursorColor: Colors.orangeAccent,
       cursorRadius: Radius.circular(5.0),
       cursorWidth: 3.0,
@@ -314,12 +308,9 @@ class _LoginState extends State<Login> {
   Widget _passTextoConfir() {
     return TextFormField(
       controller: controllerRegister3,
-              validator: (value) {
-                return value.isEmpty
-                    ? 'Campos incorrectos o vacios'
-                    : null;
-              },
-      
+      validator: (value) {
+        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+      },
       cursorColor: Colors.orangeAccent,
       cursorRadius: Radius.circular(5.0),
       cursorWidth: 3.0,
@@ -338,7 +329,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-//BOTONES
+  //BOTONES
 
   //Boton de iniciar secion
   Widget _crearBoton() {
@@ -350,9 +341,7 @@ class _LoginState extends State<Login> {
       onPressed: () {
         if (_formKeyLogin.currentState.validate()) {
           Navigator.pushNamed(context, 'Menu');
-
         }
-        
       },
       color: Colors.white,
       textColor: Colors.orangeAccent,
@@ -368,11 +357,9 @@ class _LoginState extends State<Login> {
           borderRadius: BorderRadius.circular(18.0),
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
-        if (_formKeyRegister.currentState.validate()){
+        if (_formKeyRegister.currentState.validate()) {
           Navigator.pushNamed(context, 'Menu');
-
         }
-        
       },
       color: Colors.white,
       textColor: Colors.orangeAccent,
@@ -391,6 +378,54 @@ class _LoginState extends State<Login> {
     return FacebookSignInButton(
       onPressed: () {}, borderRadius: 50.0,
       //  text: "FACEBOOK",
+    );
+  }
+
+  Widget _correoTexto2() {
+    return TextFormField(
+      controller: controllerRegister1,
+      validator: (value) {
+        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+      },
+      keyboardType: TextInputType.emailAddress,
+      cursorColor: Colors.orangeAccent,
+      cursorRadius: Radius.circular(5.0),
+      cursorWidth: 3.0,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.account_circle,
+          color: Colors.orange,
+          size: 35.0,
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        labelText: 'Correo',
+        labelStyle: estilo,
+        hintText: 'Escribe aqui',
+      ),
+    );
+  }
+
+ Widget _passTexto2() {
+    return TextFormField(
+      controller: controllerRegister2,
+      validator: (value) {
+        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+      },
+      cursorColor: Colors.orangeAccent,
+      cursorRadius: Radius.circular(5.0),
+      cursorWidth: 3.0,
+      obscureText: true,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.lock,
+          color: Colors.orange,
+          size: 35.0,
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        labelText: 'Contraseña',
+        labelStyle: estilo,
+        hintText: 'Escribe aqui',
+      ),
     );
   }
 }

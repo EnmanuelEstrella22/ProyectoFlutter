@@ -103,7 +103,7 @@ class _SchoolListState extends State<SchoolList> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                      gradient: LinearGradient(
-                  colors: [Colors.black12, Colors.orangeAccent]),
+                  colors: [Colors.redAccent, Colors.orangeAccent]),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30))),

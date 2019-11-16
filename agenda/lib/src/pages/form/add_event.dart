@@ -12,9 +12,9 @@ final usernameControllerNombre = TextEditingController();
 final usernameControllerDesp = TextEditingController();
 final usernameControllerTime = TextEditingController();
 final TextStyle estilo = new TextStyle(fontSize: 20.0);
- final _formKey = GlobalKey<FormState>();
+final _formKey = GlobalKey<FormState>();
 String _fecha = '';
-String _alert='';
+String _alert = '';
 
 var _datos = ['Evento', 'Tarea', 'No Olvidar'];
 // var _valorSel ='Evento';
@@ -40,10 +40,8 @@ class _EventosState extends State<Eventos> {
     return TextFormField(
       //key: _formKey,
       validator: (value) {
-                return value.isEmpty
-                    ? 'El evento debe de llevar un nombre'
-                    : null;
-              },
+        return value.isEmpty ? 'El evento debe de llevar un nombre' : null;
+      },
       //autofocus: true,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
@@ -61,24 +59,20 @@ class _EventosState extends State<Eventos> {
 
   Widget _crearDate(BuildContext context) {
     return TextFormField(
-       validator: (value) {
-                return value.isEmpty
-                    ? 'No hay fecha seleccionada'
-                    : null;
-              },
+      validator: (value) {
+        return value.isEmpty ? 'No hay fecha seleccionada' : null;
+      },
       controller: usernameControllerHora,
       enableInteractiveSelection: false,
       decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0)
-            ),
-          labelText: 'Fecha del evento',
-          labelStyle: estilo,
-          hintText: 'Escribe aqui',
-          icon: Icon(Icons.calendar_today, color: Colors.orange),
-          
-          // focusColor: Colors.orange
-          ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        labelText: 'Fecha del evento',
+        labelStyle: estilo,
+        hintText: 'Escribe aqui',
+        icon: Icon(Icons.calendar_today, color: Colors.orange),
+
+        // focusColor: Colors.orange
+      ),
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
         _selectDate(context);
@@ -106,10 +100,8 @@ class _EventosState extends State<Eventos> {
   Widget _crearTextHora() {
     return TextFormField(
       validator: (value) {
-                return value.isEmpty
-                    ? 'No hay fecha seleccionada'
-                    : null;
-              },
+        return value.isEmpty ? 'No hay fecha seleccionada' : null;
+      },
       //autofocus: true,
       controller: usernameControllerTime,
       enableInteractiveSelection: false,
@@ -139,10 +131,9 @@ class _EventosState extends State<Eventos> {
     TimeOfDay hr;
     if (selectedTime != null) {
       setState(() {
-
-        hr=selectedTime.replacing(hour: selectedTime.hourOfPeriod);
+        hr = selectedTime.replacing(hour: selectedTime.hourOfPeriod);
         usernameControllerTime.text = hr.format(context);
-        
+
         //  selectedTime.hour.toString() +
         //     selectedTime.minute.toString() +
         //     selectedTime.hourOfPeriod.toString();
@@ -293,10 +284,7 @@ class _EventosState extends State<Eventos> {
       ),
       color: Color.fromRGBO(255, 69, 0, 1.0),
       onPressed: () {
-
-        if (_formKey.currentState.validate()) {
-
-        }
+        if (_formKey.currentState.validate()) {}
       },
     );
   }
