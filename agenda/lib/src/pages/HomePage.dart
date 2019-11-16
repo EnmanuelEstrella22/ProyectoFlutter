@@ -1,3 +1,5 @@
+import 'package:agenda/src/pages/Ajustes.dart';
+import 'package:agenda/src/pages/Calendario.dart';
 import 'package:flutter/material.dart';
 
 import 'ListEvent.dart';
@@ -52,8 +54,8 @@ class HomePage extends StatelessWidget {
         body: TabBarView(
           children: <Widget>[
             eventos(context),
-            Icon(Icons.ac_unit),
-            Icon(Icons.live_help),
+            llamarCalendario(),
+            llamarAjustes(),
             Icon(Icons.ac_unit),
           ],
         ),
@@ -77,7 +79,6 @@ class HomePage extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.pushNamed(context, 'FormEvent');
-
           },
         ));
   }
@@ -86,37 +87,37 @@ class HomePage extends StatelessWidget {
     return SchoolList();
     // return Container(
     //   child: SchoolList(),
-      // child: Center(
-      //   child: ListView(
-      //     children: <Widget>[
-      //       ListTile(
-      //         title: Text('hola'),
-      //       ),
-            
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //       Text('hola'),
-      //     ],
-      //   ),
-      // ),
+    // child: Center(
+    //   child: ListView(
+    //     children: <Widget>[
+    //       ListTile(
+    //         title: Text('hola'),
+    //       ),
+
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //       Text('hola'),
+    //     ],
+    //   ),
+    // ),
     //   decoration: BoxDecoration(
     //       // shape: BoxShape.circle,
     //       gradient: LinearGradient(
@@ -125,6 +126,14 @@ class HomePage extends StatelessWidget {
     //           topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
     //   margin: EdgeInsets.only(top: 20.0),
     // );
+  }
+
+  Widget llamarCalendario() {
+    return Container(child: CalendarPage2());
+  }
+
+  Widget llamarAjustes() {
+    return Ajustes();
   }
 }
 
