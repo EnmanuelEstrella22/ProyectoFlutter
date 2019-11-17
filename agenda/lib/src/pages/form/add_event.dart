@@ -73,10 +73,10 @@ class _EventosState extends State<Eventos> {
 
         // focusColor: Colors.orange
       ),
-      onTap: () {
-        FocusScope.of(context).requestFocus(new FocusNode());
-        _selectDate(context);
-      },
+      // onTap: () {
+      //   FocusScope.of(context).requestFocus(new FocusNode());
+      //   _selectDate(context);
+      // },
     );
   }
 
@@ -116,10 +116,10 @@ class _EventosState extends State<Eventos> {
           color: Colors.orange,
         ),
       ),
-      onTap: () {
-        FocusScope.of(context).requestFocus(new FocusNode());
-        _selectHora(context);
-      },
+      // onTap: () {
+      //   FocusScope.of(context).requestFocus(new FocusNode());
+      //   _selectHora(context);
+      // },
     );
   }
 

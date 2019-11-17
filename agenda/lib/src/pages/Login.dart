@@ -150,7 +150,8 @@ class _LoginState extends State<Login> {
               spreadRadius: 4.0)
         ],
       ),
-      child: Column(
+      child: SingleChildScrollView(
+              child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Icon(
@@ -184,6 +185,7 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
+      )
     );
 
     return Stack(
@@ -215,7 +217,8 @@ class _LoginState extends State<Login> {
               spreadRadius: 4.0)
         ],
       ),
-      child: Column(
+      child: SingleChildScrollView(
+              child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Icon(
@@ -247,6 +250,7 @@ class _LoginState extends State<Login> {
           ),
         ],
       ),
+      )
     );
 
     return Stack(

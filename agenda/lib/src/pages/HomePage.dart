@@ -3,6 +3,7 @@ import 'package:agenda/src/pages/Calendario.dart';
 import 'package:flutter/material.dart';
 
 import 'ListEvent.dart';
+import 'Perfil.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -29,7 +30,10 @@ class HomePage extends StatelessWidget {
             tabs: <Widget>[
               Tab(
                 child: Center(
-                  child: Text("Eventos"),
+                  child: Text(
+                    "Eventos",
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
                 ),
               ),
               Tab(
@@ -56,7 +60,7 @@ class HomePage extends StatelessWidget {
             eventos(context),
             llamarCalendario(),
             llamarAjustes(),
-            Icon(Icons.ac_unit),
+            ProfileFivePage()
           ],
         ),
       ),
@@ -85,47 +89,6 @@ class HomePage extends StatelessWidget {
 
   Widget contenido() {
     return SchoolList();
-    // return Container(
-    //   child: SchoolList(),
-    // child: Center(
-    //   child: ListView(
-    //     children: <Widget>[
-    //       ListTile(
-    //         title: Text('hola'),
-    //       ),
-
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //       Text('hola'),
-    //     ],
-    //   ),
-    // ),
-    //   decoration: BoxDecoration(
-    //       // shape: BoxShape.circle,
-    //       gradient: LinearGradient(
-    //           colors: [Colors.black12, Colors.transparent, Colors.black12]),
-    //       borderRadius: BorderRadius.only(
-    //           topLeft: Radius.circular(50.0), topRight: Radius.circular(50.0))),
-    //   margin: EdgeInsets.only(top: 20.0),
-    // );
   }
 
   Widget llamarCalendario() {
@@ -136,42 +99,3 @@ class HomePage extends StatelessWidget {
     return Ajustes();
   }
 }
-
-// Container(
-//               child: ListView(
-//                 padding: EdgeInsets.only(top: 20.0),
-//                 children: <Widget>[
-
-//                   Center(
-//                     child: Row(
-//                       children: <Widget>[
-//                         FloatingActionButton(
-
-//                           child: Container(
-
-//                             width: double.infinity,
-//                             height: double.infinity,
-//                             child: Icon(Icons.list),
-//                             decoration: BoxDecoration(
-//                               gradient: LinearGradient(colors: [Colors.redAccent,Colors.orangeAccent]),
-//                               borderRadius: BorderRadius.all(Radius.circular(50.0)),
-//                             ),
-//                           ),
-//                           onPressed: (){},
-//                         )
-
-//                       ],
-//                     ),
-//                   )
-//                 ],
-//               ),
-
-//               decoration: BoxDecoration(
-//                 // shape: BoxShape.circle,
-//                 gradient: LinearGradient(colors: [Colors.black12,Colors.transparent,Colors.black12]),
-//                 borderRadius: BorderRadius.only(bottomRight: Radius.circular(50.0),topLeft: Radius.circular(50.0),
-//                 topRight: Radius.circular(50.0),bottomLeft: Radius.circular(50.0)
-//                 )
-//               ),
-//               margin: EdgeInsets.only(top: 20.0),
-//     );

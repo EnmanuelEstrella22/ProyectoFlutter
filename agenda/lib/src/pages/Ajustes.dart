@@ -27,6 +27,7 @@ class Ajustes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 5.0),
       child: ListView(
         children: _drawerItems(context)),
     );
@@ -40,7 +41,7 @@ class Ajustes extends StatelessWidget {
       list
         ..add(itemMenu(it, context))
         ..add(Divider(
-          thickness: 1.4,
+          // thickness: 1.4,
         ));
     }
 
@@ -51,11 +52,11 @@ class Ajustes extends StatelessWidget {
     // print(it['iconos']);
     return ListTile(
       title: Text(it['label'],
-          style: TextStyle(fontSize: 22.0, color: Colors.black),
+          style: TextStyle(fontSize: 22.0, color: Colors.black,fontStyle: FontStyle.italic),
           textAlign: TextAlign.left),
           
       leading: getIcon(it['iconos']),
-      trailing: Icon(Icons.arrow_forward_ios,color: Color.fromRGBO(255, 69, 0, 1.0),),
+      trailing: Icon(Icons.arrow_forward_ios,color: Color.fromRGBO(255, 69, 0, 1.0),size: 15.0,),
       onTap: () {
         Navigator.pushNamed(context, it['ruta']);
       },

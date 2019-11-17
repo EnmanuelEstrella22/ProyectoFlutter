@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
@@ -17,57 +18,57 @@ class _SchoolListState extends State<SchoolList> {
 
   final List<Map> schoolLists = [
     {
-      "name": "Enmanuel Estrella",
+      "name": "Mi Cumpleaño",
       "location": "15/11/2019",
       "type": "12:00 PM",
       "logoText":
           "https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_960_720.png"
     },
     {
-      "name": "Yoel Nuñez",
+      "name": "Cita de Almorzar",
       "location": "12/12/2019",
       "type": "2:00 AM",
       "logoText":
           "https://cdn.pixabay.com/photo/2017/01/31/13/14/animal-2023924_960_720.png"
     },
     {
-      "name": "Edgar Ariel",
+      "name": "Cita con la Vecina",
       "location": "22/1/1999",
       "type": "11:23 PM",
       "logoText":
           "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
     },
     {
-      "name": "Elian Estrella",
+      "name": "Cita con la Vecina",
       "location": "03/05/2016",
       "type": "1:30 AM",
       "logoText":
           "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
     },
     {
-      "name": "Elian Estrella",
+      "name": "Cita con la Vecina",
       "location": "03/05/2016",
       "type": "1:30 AM",
       "logoText":
           "https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_960_720.png"
     },
     {
-      "name": "Elian Estrella",
+      "name": "Cita con la Vecina",
       "location": "03/05/2016",
       "type": "1:30 AM",
       "logoText":
           "https://cdn.pixabay.com/photo/2017/01/31/13/14/animal-2023924_960_720.png"
     },
     {
-      "name": "Elian Estrella",
+      "name": "Cita con la Vecina",
       "location": "03/05/2016",
       "type": "1:30 AM",
       "logoText":
           "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
     },
     {
-      "name": "Campare Handeson",
-      "location": "Kasai Pantan NY, 12483",
+      "name": "Cita cn la Vecina",
+      "location": "03/05/2016",
       "type": "1:30 AM",
       "logoText":
           "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
@@ -84,7 +85,6 @@ class _SchoolListState extends State<SchoolList> {
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: <Widget>[
-
               //contenedor de la lista
               Container(
                 padding: EdgeInsets.only(top: 105),
@@ -102,32 +102,72 @@ class _SchoolListState extends State<SchoolList> {
                 height: 50,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                     gradient: LinearGradient(
-                  colors: [Colors.redAccent, Colors.orangeAccent]),
+                    gradient: LinearGradient(
+                        colors: [Colors.black12, Colors.black12]),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30))),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 1),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showCupertinoModalPopup(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                CupertinoActionSheet(
+                                    title: const Text('Escoger Opciones',
+                                        style: TextStyle(
+                                            fontStyle: FontStyle.italic)),
+                                    message: const Text('Ordenar Por:',
+                                        style: TextStyle(
+                                            fontStyle: FontStyle.italic)),
+                                    actions: <Widget>[
+                                      CupertinoActionSheetAction(
+                                        child: const Text('FECHA'),
+                                        onPressed: () {
+                                          // Navigator.pop(context, 'One');
+                                        },
+                                      ),
+                                      CupertinoActionSheetAction(
+                                        child: const Text('TIPO'),
+                                        onPressed: () {
+                                          // Navigator.pop(context, 'Two');
+                                        },
+                                      )
+                                    ],
+                                    cancelButton: CupertinoActionSheetAction(
+                                      child: const Text('Cancelar',
+                                          style: TextStyle(
+                                              fontStyle: FontStyle.italic)),
+                                      isDefaultAction: true,
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    )),
+                          );
+                        },
                         icon: Icon(
                           Icons.menu,
                           color: Colors.white,
+                          size: 30.0,
                         ),
                       ),
-                      // Text(
-                      //   "Eventos",
-                      //   style: TextStyle(color: Colors.white, fontSize: 24),
-                      // ),
+                      Text(
+                        "TODOS",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontStyle: FontStyle.italic),
+                      ),
                       IconButton(
                         onPressed: () {},
                         icon: Icon(
                           Icons.filter_list,
-                          color: Colors.white,
+                          color: Colors.transparent,
                         ),
                       ),
                     ],
@@ -151,7 +191,7 @@ class _SchoolListState extends State<SchoolList> {
                           cursorColor: Theme.of(context).primaryColor,
                           style: dropdownMenuItem,
                           decoration: InputDecoration(
-                              hintText: "Search Event",
+                              hintText: "Buscar Evento",
                               hintStyle: TextStyle(
                                   color: Colors.black38, fontSize: 16),
                               prefixIcon: Material(
@@ -198,8 +238,8 @@ class _SchoolListState extends State<SchoolList> {
               borderRadius: BorderRadius.circular(50),
               border: Border.all(width: 3, color: secondary),
               // image: DecorationImage(
-                  // image: CachedNetworkImageProvider(schoolLists[index]['logoText']),
-                  // fit: BoxFit.fill),
+              // image: CachedNetworkImageProvider(schoolLists[index]['logoText']),
+              // fit: BoxFit.fill),
             ),
           ),
           Expanded(
@@ -257,5 +297,3 @@ class _SchoolListState extends State<SchoolList> {
     );
   }
 }
-
-
