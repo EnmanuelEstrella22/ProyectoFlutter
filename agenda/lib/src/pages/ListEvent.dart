@@ -274,6 +274,7 @@ class _SchoolListState extends State<SchoolList> {
                   // image: CachedNetworkImageProvider(schoolLists[index]['logoText']),
                   // fit: BoxFit.fill),
                 ),
+                //colocar algo   
               ),
               Expanded(
                 child: Column(
