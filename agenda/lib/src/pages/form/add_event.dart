@@ -1,3 +1,5 @@
+import 'package:agenda/models/eventModel.dart';
+import 'package:agenda/providers/db_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -42,7 +44,7 @@ class _EventosState extends State<Eventos> {
       validator: (value) {
         return value.isEmpty ? 'El evento debe de llevar un nombre' : null;
       },
-      //autofocus: true,
+      controller: usernameControllerNombre,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -58,10 +60,7 @@ class _EventosState extends State<Eventos> {
   }
 
   Widget _crearDate(BuildContext context) {
-    return TextFormField(
-      validator: (value) {
-        return value.isEmpty ? 'No hay fecha seleccionada' : null;
-      },
+    return TextField(
       controller: usernameControllerHora,
       enableInteractiveSelection: false,
       decoration: InputDecoration(
@@ -73,10 +72,10 @@ class _EventosState extends State<Eventos> {
 
         // focusColor: Colors.orange
       ),
-      // onTap: () {
-      //   FocusScope.of(context).requestFocus(new FocusNode());
-      //   _selectDate(context);
-      // },
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+        _selectDate(context);
+      },
     );
   }
 
@@ -98,10 +97,7 @@ class _EventosState extends State<Eventos> {
   }
 
   Widget _crearTextHora() {
-    return TextFormField(
-      validator: (value) {
-        return value.isEmpty ? 'No hay fecha seleccionada' : null;
-      },
+    return TextField(
       //autofocus: true,
       controller: usernameControllerTime,
       enableInteractiveSelection: false,
@@ -116,24 +112,21 @@ class _EventosState extends State<Eventos> {
           color: Colors.orange,
         ),
       ),
-      // onTap: () {
-      //   FocusScope.of(context).requestFocus(new FocusNode());
-      //   _selectHora(context);
-      // },
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+        _selectHora(context);
+      },
     );
   }
 
   _selectHora(BuildContext context) async {
     TimeOfDay selectedTime = await showTimePicker(
-      initialTime: TimeOfDay.now(),
+     initialTime: TimeOfDay.fromDateTime(DateTime.now()),
       context: context,
     );
-    TimeOfDay hr;
     if (selectedTime != null) {
       setState(() {
-        hr = selectedTime.replacing(hour: selectedTime.hourOfPeriod);
-        usernameControllerTime.text = hr.format(context);
-
+        usernameControllerTime.text=selectedTime.format(context);
         //  selectedTime.hour.toString() +
         //     selectedTime.minute.toString() +
         //     selectedTime.hourOfPeriod.toString();
@@ -149,6 +142,7 @@ class _EventosState extends State<Eventos> {
       //               : null;
       //         },
       //autofocus: true,
+      controller: usernameControllerDesp,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -284,7 +278,25 @@ class _EventosState extends State<Eventos> {
       ),
       color: Color.fromRGBO(255, 69, 0, 1.0),
       onPressed: () {
-        if (_formKey.currentState.validate()) {}
+        if (_formKey.currentState.validate()) {
+          DBProvider.db
+                  .addEvento(EventModel(nombre: usernameControllerNombre.text,fecha: usernameControllerTime.text,
+                  hora: usernameControllerHora.text,descripcion: usernameControllerDesp.text,
+                  tipo: _valorSel.toString()));
+                  final snackBar = SnackBar(
+                    duration: Duration(milliseconds: 1200),
+                    content: Text(
+                        'El usuario ${usernameControllerNombre.text} ha sido guardado'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        // Some code to undo the change.
+                      },
+                    ),
+                  );
+                  Scaffold.of(context).showSnackBar(snackBar);
+                  _formKey.currentState?.reset();     
+        }
       },
     );
   }
