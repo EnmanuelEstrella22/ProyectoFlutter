@@ -18,21 +18,25 @@ final _formKey = GlobalKey<FormState>();
 String _fecha = '';
 String _alert = '';
 
-var _datos = ['Evento', 'Tarea', 'No Olvidar'];
+var _datos = ['muy importante', 'solo recordar'];
 // var _valorSel ='Evento';
 
 class _EventosState extends State<Eventos> {
   String _valorSel;
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       //floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       floatingActionButton: floatb(),
       body: Stack(
         children: <Widget>[
+          
           _crearfondo(context),
           _formulario(context),
+          
         ],
       ),
     );
@@ -89,7 +93,7 @@ class _EventosState extends State<Eventos> {
 
     if (picked != null) {
       setState(() {
-        DateFormat format = new DateFormat.yMd();
+        DateFormat format = new DateFormat("dd/MM/yyyy");
         _fecha = format.format(picked);
         usernameControllerHora.text = _fecha;
       });
@@ -280,8 +284,8 @@ class _EventosState extends State<Eventos> {
       onPressed: () {
         if (_formKey.currentState.validate()) {
           DBProvider.db
-                  .addEvento(EventModel(nombre: usernameControllerNombre.text,fecha: usernameControllerTime.text,
-                  hora: usernameControllerHora.text,descripcion: usernameControllerDesp.text,
+                  .addEvento(EventModel(nombre: usernameControllerNombre.text,fecha: usernameControllerHora.text,
+                  hora: usernameControllerTime.text,descripcion: usernameControllerDesp.text,
                   tipo: _valorSel.toString()));
                   final snackBar = SnackBar(
                     duration: Duration(milliseconds: 1200),
@@ -290,32 +294,45 @@ class _EventosState extends State<Eventos> {
                     action: SnackBarAction(
                       label: 'Undo',
                       onPressed: () {
+                        cleanText();
                         // Some code to undo the change.
                       },
                     ),
                   );
                   Scaffold.of(context).showSnackBar(snackBar);
-                  _formKey.currentState?.reset();     
+                  _formKey.currentState?.reset(); 
+                      
         }
-      },
-    );
-  }
 
-  Widget floatb() {
-    return FloatingActionButton(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Icon(Icons.arrow_back),
-        decoration: BoxDecoration(
-          gradient:
-              LinearGradient(colors: [Colors.redAccent, Colors.orangeAccent]),
-          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-        ),
-      ),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-  }
+                  cleanText();
+              },
+            );
+          }
+        
+          Widget floatb() {
+            return FloatingActionButton(
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                child: Icon(Icons.arrow_back),
+                decoration: BoxDecoration(
+                  gradient:
+                      LinearGradient(colors: [Colors.redAccent, Colors.orangeAccent]),
+                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                cleanText();
+              },
+            );
+          }
+        
+          void cleanText() {
+            usernameControllerDesp.clear();
+            usernameControllerNombre.clear();
+            usernameControllerHora.clear();
+            usernameControllerTime.clear();
+          
+          }
 }

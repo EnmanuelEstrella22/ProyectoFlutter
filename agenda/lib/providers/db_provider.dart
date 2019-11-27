@@ -81,6 +81,19 @@ class DBProvider {
 
     return result.isNotEmpty ? EventModel.fromMap(result.first) : null;
   }
+// Lista de eventos para el calendario Trayendolo en una lista para luego convertirlo a un DateTime
+  // Future<List<UserModel>> listaeventoCalendario() async {
+  //   final db = await database;
+
+  //   final results = await db.query('eventos');
+
+  //   List<EventModel> users = results.isNotEmpty
+  //       ? results.map((user) => EventModel.fromMap(user)).toList()
+  //       : [];
+  //   return users;
+  // }
+
+  
 
   Future<int> updateEvent(EventModel event) async {
     final db = await database;

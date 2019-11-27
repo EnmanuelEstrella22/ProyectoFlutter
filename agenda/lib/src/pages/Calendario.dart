@@ -1,3 +1,4 @@
+import 'package:agenda/providers/db_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
@@ -7,22 +8,30 @@ import 'package:flutter_calendar_carousel/classes/event_list.dart';
 
 class CalendarPage2 extends StatefulWidget {
   @override
+
+
+   
   _CalendarPage2State createState() => new _CalendarPage2State();
 }
 
+
+//solo recordar
 List<DateTime> presentDates = [
-  DateTime(2019, 2, 1),
-  DateTime(2019, 2, 3),
-  DateTime(2019, 2, 4),
-  DateTime(2019, 2, 5),
-  DateTime(2019, 2, 6),
-  DateTime(2019, 2, 9),
-  DateTime(2019, 2, 10),
-  DateTime(2019, 2, 11),
-  DateTime(2019, 2, 15),
-  DateTime(2019, 2, 11),
-  DateTime(2019, 2, 22),
+
+  DateTime(2019, 11, 1),
+  DateTime(2019, 11, 3),
+  DateTime(2019, 11, 4),
+  DateTime(2019, 11, 5),
+  DateTime(2019, 11, 6),
+  DateTime(2019, 11, 9),
+  DateTime(2019, 11, 10),
+  DateTime(2019, 11, 11),
+  DateTime(2019, 11, 15),
+  DateTime(2019, 11, 11),
+  DateTime(2019, 11, 22),
 ];
+
+//importantes
 List<DateTime> absentDates = [
   DateTime(2019, 2, 2),
   DateTime(2019, 2, 7),
@@ -84,6 +93,7 @@ class _CalendarPage2State extends State<CalendarPage2> {
   @override
   Widget build(BuildContext context) {
     cHeight = MediaQuery.of(context).size.height;
+
     for (int i = 0; i < len; i++) {
       _markedDateMap.add(
         presentDates[i],

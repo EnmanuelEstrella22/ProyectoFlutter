@@ -2,6 +2,7 @@ import 'package:agenda/src/pages/Ajustes.dart';
 import 'package:agenda/src/pages/Calendario.dart';
 import 'package:flutter/material.dart';
 
+import 'Calendariosqlite.dart';
 import 'ListEvent.dart';
 import 'Perfil.dart';
 
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "AgenRec",
+            "Task To Do",
             style: TextStyle(
                 color: Colors.orangeAccent, fontFamily: "Time New Roman"),
           ),
@@ -92,7 +93,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget llamarCalendario() {
-    return Container(child: CalendarPage2());
+    return Container(child: CalendarPage3());
   }
 
   Widget llamarAjustes() {

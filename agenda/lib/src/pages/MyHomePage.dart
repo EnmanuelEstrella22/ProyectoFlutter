@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         const Locale('en', 'US'), // English
         const Locale('es','ES'), // Hebrew
         const Locale.fromSubtags(
-            languageCode: 'zh'), // Chinese *See Advanced Locales below*
+            languageCode: 'es'), // Chinese *See Advanced Locales below*
       ],
       initialRoute: '/',
         routes:{
