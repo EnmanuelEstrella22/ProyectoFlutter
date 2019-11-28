@@ -12,7 +12,7 @@ import 'package:agenda/models/userModel.dart';
 class DBProvider {
   static Database _database;
   static final DBProvider db = DBProvider._private();
-  static final tab1 = 'CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR NOT NULL)';
+  static final tab1 = 'CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR NOT NULL,pass VARCHAR NOT NULL)';
   static final tab2 = 'CREATE TABLE eventos(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR NOT NULL,fecha VARCHAR NOT NULL,hora VARCHAR NOT NULL,descripcion VARCHAR NOT NULL,tipo VARCHAR NOT NULL)';
   final tablas = [tab1,tab2];
   DBProvider._private();
@@ -80,6 +80,16 @@ class DBProvider {
     //final result = await db.execute('SELECT * FROM users WHERE id = $id');
 
     return result.isNotEmpty ? EventModel.fromMap(result.first) : null;
+  }
+
+  Future<UserModel> searchUserByCorreo(String correo) async {
+    final db = await database;
+
+    final result = await db.query('users', where: 'nombre = ?',
+        whereArgs: [correo]);
+    //final result = await db.execute('SELECT * FROM users WHERE id = $id');
+
+    return result.isNotEmpty ? UserModel.fromMap(result.first) : null;
   }
 // Lista de eventos para el calendario Trayendolo en una lista para luego convertirlo a un DateTime
   // Future<List<UserModel>> listaeventoCalendario() async {

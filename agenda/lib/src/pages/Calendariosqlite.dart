@@ -23,6 +23,8 @@ List<DateTime> absentDates = [];
 
 class _CalendarPage2State extends State<CalendarPage3> {
   DateTime _currentDate2 = DateTime.now();
+
+  //Botones subrayados en Verde
   static Widget _presentIcon(String day) => Container(
         decoration: BoxDecoration(
           color: Colors.green,
@@ -39,6 +41,8 @@ class _CalendarPage2State extends State<CalendarPage3> {
           ),
         ),
       );
+
+      // Evento Subrayado en Rojo
   static Widget _absentIcon(String day) => Container(
         decoration: BoxDecoration(
           color: Colors.red,
@@ -50,7 +54,7 @@ class _CalendarPage2State extends State<CalendarPage3> {
           child: Text(
             day,
             style: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ),
@@ -116,7 +120,7 @@ class _CalendarPage2State extends State<CalendarPage3> {
         _calendarCarouselNoHeader = CalendarCarousel<Event>(
           height: cHeight * 0.54,
           weekendTextStyle: TextStyle(
-            color: Colors.red,
+            color: Colors.redAccent,
           ),
           todayButtonColor: Colors.blue[200],
           markedDatesMap: _markedDateMap,

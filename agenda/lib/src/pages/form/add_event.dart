@@ -294,7 +294,9 @@ class _EventosState extends State<Eventos> {
                     action: SnackBarAction(
                       label: 'Undo',
                       onPressed: () {
-                        cleanText();
+
+                        
+                        
                         // Some code to undo the change.
                       },
                     ),
@@ -304,7 +306,10 @@ class _EventosState extends State<Eventos> {
                       
         }
 
-                  cleanText();
+                  
+                  setState(() {
+                    cleanText();
+                  });
               },
             );
           }

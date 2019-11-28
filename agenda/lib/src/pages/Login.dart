@@ -1,4 +1,7 @@
 import 'dart:math';
+import 'package:agenda/models/eventModel.dart';
+import 'package:agenda/models/userModel.dart';
+import 'package:agenda/providers/db_provider.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 import 'package:flutter/material.dart';
@@ -160,7 +163,7 @@ class _LoginState extends State<Login> {
             size: 80.0,
           ),
           Text(
-            "LOGIN",
+            "Iniciar Sesion",
             style: TextStyle(
                 color: Colors.orangeAccent,
                 fontSize: 25.0,
@@ -227,7 +230,7 @@ class _LoginState extends State<Login> {
             size: 80.0,
           ),
           Text(
-            "SIGN IN",
+            "Registrarse",
             style: TextStyle(
                 color: Colors.orangeAccent,
                 fontSize: 25.0,
@@ -344,6 +347,10 @@ class _LoginState extends State<Login> {
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
         if (_formKeyLogin.currentState.validate()) {
+         
+         
+         
+          
           Navigator.pushNamed(context, 'Menu');
         }
       },
@@ -362,12 +369,39 @@ class _LoginState extends State<Login> {
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
         if (_formKeyRegister.currentState.validate()) {
-          Navigator.pushNamed(context, 'Menu');
+          
+          DBProvider.db
+                      .addUser(UserModel(nombre: controllerRegister1.text,pass: controllerRegister2.text));
+
+                  final snackBar = SnackBar(
+                    duration: Duration(milliseconds: 1200),
+                    content: Text(
+                        'El usuario ${controllerRegister1.text} ha sido guardado'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        // Some code to undo the change.
+                      },
+                    ),
+                  );
+                  Scaffold.of(context).showSnackBar(snackBar);
+                  _formKeyRegister.currentState?.reset();
+          
+          //Navigator.pushNamed(context, 'Menu');
         }
+
+        setState(() {
+          controllerRegister1.clear();
+          controllerRegister2.clear();
+          controllerRegister3.clear();
+          
+        });
       },
       color: Colors.white,
       textColor: Colors.orangeAccent,
-      child: Text("INICIAR".toUpperCase(), style: TextStyle(fontSize: 20)),
+      child: Text("Aceptar".toUpperCase(), style: TextStyle(fontSize: 20)),
+
+      
     );
   }
 
