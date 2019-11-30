@@ -345,119 +345,116 @@ class _LoginState extends State<Login> {
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
         if (_formKeyLogin.currentState.validate()) {
-          
-          
+          Navigator.pushNamed(context, 'Menu');
         }
-                },
-                color: Colors.white,
-                textColor: Colors.orangeAccent,
-                child: Text("Iniciar".toUpperCase(), style: TextStyle(fontSize: 20)),
-              );
-            }
-          
-            //Boton Registrarte
-            Widget _crearBotonRegis() {
-              return RaisedButton(
-                padding: EdgeInsets.only(left: 35.0, right: 35.0),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.orangeAccent)),
-                onPressed: () {
-                  if (_formKeyRegister.currentState.validate()) {
-                    DBProvider.db.addUser(UserModel(
-                        nombre: controllerRegister1.text,
-                        pass: controllerRegister2.text));
-          
-                    final snackBar = SnackBar(
-                      duration: Duration(milliseconds: 1200),
-                      content:
-                          Text('El usuario ${controllerRegister1.text} ha sido guardado'),
-                      action: SnackBarAction(
-                        label: 'Undo',
-                        onPressed: () {
-                          // Some code to undo the change.
-                        },
-                      ),
-                    );
-                    Scaffold.of(context).showSnackBar(snackBar);
-                    _formKeyRegister.currentState?.reset();
-          
-                    //Navigator.pushNamed(context, 'Menu');
-                  }
-          
-                  setState(() {
-                    controllerRegister1.clear();
-                    controllerRegister2.clear();
-                    controllerRegister3.clear();
-                  });
-                },
-                color: Colors.white,
-                textColor: Colors.orangeAccent,
-                child: Text("Aceptar".toUpperCase(), style: TextStyle(fontSize: 20)),
-              );
-            }
-          
-            Widget _googleBotton() {
-              return GoogleSignInButton(
-                onPressed: () {},
-                borderRadius: 50.0,
-              );
-            }
-          
-            Widget _facebookBotton() {
-              return FacebookSignInButton(
-                onPressed: () {}, borderRadius: 50.0,
-                //  text: "FACEBOOK",
-              );
-            }
-          
-            Widget _correoTexto2() {
-              return TextFormField(
-                controller: controllerRegister1,
-                validator: (value) {
-                  return value.isEmpty ? 'Campos incorrectos o vacios' : null;
-                },
-                keyboardType: TextInputType.emailAddress,
-                cursorColor: Colors.orangeAccent,
-                cursorRadius: Radius.circular(5.0),
-                cursorWidth: 3.0,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.account_circle,
-                    color: Colors.orange,
-                    size: 35.0,
-                  ),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-                  labelText: 'Correo',
-                  labelStyle: estilo,
-                  hintText: 'Escribe aqui',
-                ),
-              );
-            }
-          
-            Widget _passTexto2() {
-              return TextFormField(
-                controller: controllerRegister2,
-                validator: (value) {
-                  return value.isEmpty ? 'Campos incorrectos o vacios' : null;
-                },
-                cursorColor: Colors.orangeAccent,
-                cursorRadius: Radius.circular(5.0),
-                cursorWidth: 3.0,
-                obscureText: true,
-                decoration: InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: Colors.orange,
-                    size: 35.0,
-                  ),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-                  labelText: 'Contraseña',
-                  labelStyle: estilo,
-                  hintText: 'Escribe aqui',
-                ),
-              );
-            }
-          
-    
+      },
+      color: Colors.white,
+      textColor: Colors.orangeAccent,
+      child: Text("Iniciar".toUpperCase(), style: TextStyle(fontSize: 20)),
+    );
+  }
+
+  //Boton Registrarte
+  Widget _crearBotonRegis() {
+    return RaisedButton(
+      padding: EdgeInsets.only(left: 35.0, right: 35.0),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+          side: BorderSide(color: Colors.orangeAccent)),
+      onPressed: () {
+        if (_formKeyRegister.currentState.validate()) {
+          DBProvider.db.addUser(UserModel(
+              nombre: controllerRegister1.text,
+              pass: controllerRegister2.text));
+
+          final snackBar = SnackBar(
+            duration: Duration(milliseconds: 1200),
+            content:
+                Text('El usuario ${controllerRegister1.text} ha sido guardado'),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );
+          Scaffold.of(context).showSnackBar(snackBar);
+          _formKeyRegister.currentState?.reset();
+
+          Navigator.pushNamed(context, 'Menu');
+        }
+
+        setState(() {
+          controllerRegister1.clear();
+          controllerRegister2.clear();
+          controllerRegister3.clear();
+        });
+      },
+      color: Colors.white,
+      textColor: Colors.orangeAccent,
+      child: Text("Aceptar".toUpperCase(), style: TextStyle(fontSize: 20)),
+    );
+  }
+
+  Widget _googleBotton() {
+    return GoogleSignInButton(
+      onPressed: () {},
+      borderRadius: 50.0,
+    );
+  }
+
+  Widget _facebookBotton() {
+    return FacebookSignInButton(
+      onPressed: () {}, borderRadius: 50.0,
+      //  text: "FACEBOOK",
+    );
+  }
+
+  Widget _correoTexto2() {
+    return TextFormField(
+      controller: controllerRegister1,
+      validator: (value) {
+        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+      },
+      keyboardType: TextInputType.emailAddress,
+      cursorColor: Colors.orangeAccent,
+      cursorRadius: Radius.circular(5.0),
+      cursorWidth: 3.0,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.account_circle,
+          color: Colors.orange,
+          size: 35.0,
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        labelText: 'Correo',
+        labelStyle: estilo,
+        hintText: 'Escribe aqui',
+      ),
+    );
+  }
+
+  Widget _passTexto2() {
+    return TextFormField(
+      controller: controllerRegister2,
+      validator: (value) {
+        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+      },
+      cursorColor: Colors.orangeAccent,
+      cursorRadius: Radius.circular(5.0),
+      cursorWidth: 3.0,
+      obscureText: true,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.lock,
+          color: Colors.orange,
+          size: 35.0,
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        labelText: 'Contraseña',
+        labelStyle: estilo,
+        hintText: 'Escribe aqui',
+      ),
+    );
+  }
 }
