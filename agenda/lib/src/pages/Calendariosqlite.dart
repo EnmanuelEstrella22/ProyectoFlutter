@@ -42,7 +42,7 @@ class _CalendarPage2State extends State<CalendarPage3> {
         ),
       );
 
-      // Evento Subrayado en Rojo
+  // Evento Subrayado en Rojo
   static Widget _absentIcon(String day) => Container(
         decoration: BoxDecoration(
           color: Colors.red,
@@ -76,7 +76,7 @@ class _CalendarPage2State extends State<CalendarPage3> {
       future: DBProvider.db.listaEvento(),
       builder:
           (BuildContext context, AsyncSnapshot<List<EventModel>> snapshot) {
-        if (snapshot.data.length == 0) {
+        if (snapshot.hasData==null) {
           return Center(
             child: Text(
               'No Hay Eventos Creados',
@@ -84,9 +84,6 @@ class _CalendarPage2State extends State<CalendarPage3> {
             ),
           );
         }
-        
-
-        
 
         agregadatos(context, snapshot.data);
         agregadatos2(context, snapshot.data);
@@ -159,28 +156,32 @@ class _CalendarPage2State extends State<CalendarPage3> {
     );
   }
 
-  List agregadatos(BuildContext context, List<EventModel> users) {
-    return users.map((user) {
-     // print(user.fecha);
-      try {
-        int dia = 0;
-        int mes = 0;
-        int ano = 0;
-        if (user.tipo == 'muy importante') {
-          dia = int.parse(user.fecha.split("/")[0]);
-          mes = int.parse(user.fecha.split("/")[1]);
-          ano = int.parse(user.fecha.split("/")[2]);
-        }
-        //print(DateTime(ano, mes, dia));
-        return absentDates.add(DateTime(ano, mes, dia));
-      } catch (err) {
-        print('jhjh');
-      }
-    }).toList();
+  Future<List> agregadatos(BuildContext context, List<EventModel> users) async{
+    absentDates.clear();
+    var map = users.map((user) {
+          // print(user.fecha);
+          try {
+            int dia = 0;
+            int mes = 0;
+            int ano = 0;
+            if (user.tipo == 'muy importante') {
+              dia = int.parse(user.fecha.split("/")[0]);
+              mes = int.parse(user.fecha.split("/")[1]);
+              ano = int.parse(user.fecha.split("/")[2]);
+            }
+            //print(DateTime(ano, mes, dia));
+            return absentDates.add(DateTime(ano, mes, dia));
+          } catch (err) {
+            print('jhjh');
+          }
+        });
+        return map.toList();
   }
 
-  List agregadatos2(BuildContext context, List<EventModel> users) {
-    return users.map((user) {
+  Future<List> agregadatos2(BuildContext context, List<EventModel> users) async {
+    presentDates.clear();
+    var users2 = users;
+        return users2.map((user) {
       //print(user.fecha);
       try {
         int dia = 0;

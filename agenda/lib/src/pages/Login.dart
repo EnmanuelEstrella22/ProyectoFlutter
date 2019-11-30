@@ -134,62 +134,61 @@ class _LoginState extends State<Login> {
   //formulario de inicio de secion
   Widget _formulario() {
     final contenedor = Container(
-      margin: EdgeInsets.only(top: 20.0, left: 15.0),
-      padding: EdgeInsets.only(right: 10.0, left: 10.0),
-      width: 330.0,
-      height: 500.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10.0),
-            topRight: Radius.circular(50.0),
-            bottomLeft: Radius.circular(50.0),
-            bottomRight: Radius.circular(10.0)),
-        color: Colors.white,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-              color: Colors.black26,
-              blurRadius: 3.0,
-              offset: Offset(0.2, 0.5),
-              spreadRadius: 4.0)
-        ],
-      ),
-      child: SingleChildScrollView(
-              child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Icon(
-            Icons.account_circle,
-            color: Colors.orange,
-            size: 80.0,
+        margin: EdgeInsets.only(top: 20.0, left: 15.0),
+        padding: EdgeInsets.only(right: 10.0, left: 10.0),
+        width: 330.0,
+        height: 500.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10.0),
+              topRight: Radius.circular(50.0),
+              bottomLeft: Radius.circular(50.0),
+              bottomRight: Radius.circular(10.0)),
+          color: Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black26,
+                blurRadius: 3.0,
+                offset: Offset(0.2, 0.5),
+                spreadRadius: 4.0)
+          ],
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.account_circle,
+                color: Colors.orange,
+                size: 80.0,
+              ),
+              Text(
+                "Iniciar Sesion",
+                style: TextStyle(
+                    color: Colors.orangeAccent,
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.normal),
+              ),
+              Form(
+                key: _formKeyLogin,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 40.0, width: double.infinity),
+                    _correoTexto(),
+                    SizedBox(height: 20.0, width: double.infinity),
+                    _passTexto(),
+                    SizedBox(height: 40.0, width: double.infinity),
+                    _crearBoton(),
+                    SizedBox(height: 10.0, width: double.infinity),
+                    _googleBotton(),
+                    // SizedBox(width: 100.0),
+                    _facebookBotton()
+                  ],
+                ),
+              ),
+            ],
           ),
-          Text(
-            "Iniciar Sesion",
-            style: TextStyle(
-                color: Colors.orangeAccent,
-                fontSize: 25.0,
-                fontWeight: FontWeight.normal),
-          ),
-          Form(
-            key: _formKeyLogin,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 40.0, width: double.infinity),
-                _correoTexto(),
-                SizedBox(height: 20.0, width: double.infinity),
-                _passTexto(),
-                SizedBox(height: 40.0, width: double.infinity),
-                _crearBoton(),
-                SizedBox(height: 10.0, width: double.infinity),
-                _googleBotton(),
-                // SizedBox(width: 100.0),
-                _facebookBotton()
-              ],
-            ),
-          ),
-        ],
-      ),
-      )
-    );
+        ));
 
     return Stack(
       children: <Widget>[
@@ -201,60 +200,59 @@ class _LoginState extends State<Login> {
   //formulario de registro
   Widget _formularioRegistro() {
     final contenedor = Container(
-      margin: EdgeInsets.only(top: 20.0, left: 15.0, bottom: 30.0),
-      padding: EdgeInsets.only(right: 10.0, left: 10.0),
-      width: 330.0,
-      height: 500.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(50.0),
-            topRight: Radius.circular(10.0),
-            bottomLeft: Radius.circular(10.0),
-            bottomRight: Radius.circular(50.0)),
-        color: Colors.white,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-              color: Colors.black26,
-              blurRadius: 3.0,
-              offset: Offset(0.2, 0.5),
-              spreadRadius: 4.0)
-        ],
-      ),
-      child: SingleChildScrollView(
-              child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Icon(
-            Icons.account_circle,
-            color: Colors.orange,
-            size: 80.0,
+        margin: EdgeInsets.only(top: 20.0, left: 15.0, bottom: 30.0),
+        padding: EdgeInsets.only(right: 10.0, left: 10.0),
+        width: 330.0,
+        height: 500.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(50.0),
+              topRight: Radius.circular(10.0),
+              bottomLeft: Radius.circular(10.0),
+              bottomRight: Radius.circular(50.0)),
+          color: Colors.white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black26,
+                blurRadius: 3.0,
+                offset: Offset(0.2, 0.5),
+                spreadRadius: 4.0)
+          ],
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.account_circle,
+                color: Colors.orange,
+                size: 80.0,
+              ),
+              Text(
+                "Registrarse",
+                style: TextStyle(
+                    color: Colors.orangeAccent,
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.normal),
+              ),
+              Form(
+                key: _formKeyRegister,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 40.0, width: double.infinity),
+                    _correoTexto2(),
+                    SizedBox(height: 20.0, width: double.infinity),
+                    _passTexto2(),
+                    SizedBox(height: 20.0, width: double.infinity),
+                    _passTextoConfir(),
+                    SizedBox(height: 40.0, width: double.infinity),
+                    _crearBotonRegis(),
+                  ],
+                ),
+              ),
+            ],
           ),
-          Text(
-            "Registrarse",
-            style: TextStyle(
-                color: Colors.orangeAccent,
-                fontSize: 25.0,
-                fontWeight: FontWeight.normal),
-          ),
-          Form(
-            key: _formKeyRegister,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 40.0, width: double.infinity),
-                _correoTexto2(),
-                SizedBox(height: 20.0, width: double.infinity),
-                _passTexto2(),
-                SizedBox(height: 20.0, width: double.infinity),
-                _passTextoConfir(),
-                SizedBox(height: 40.0, width: double.infinity),
-                _crearBotonRegis(),
-              ],
-            ),
-          ),
-        ],
-      ),
-      )
-    );
+        ));
 
     return Stack(
       children: <Widget>[contenedor],
@@ -347,123 +345,119 @@ class _LoginState extends State<Login> {
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
         if (_formKeyLogin.currentState.validate()) {
-         
-         
-         
           
-          Navigator.pushNamed(context, 'Menu');
+          
         }
-      },
-      color: Colors.white,
-      textColor: Colors.orangeAccent,
-      child: Text("Iniciar".toUpperCase(), style: TextStyle(fontSize: 20)),
-    );
-  }
-
-  //Boton Registrarte
-  Widget _crearBotonRegis() {
-    return RaisedButton(
-      padding: EdgeInsets.only(left: 35.0, right: 35.0),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-          side: BorderSide(color: Colors.orangeAccent)),
-      onPressed: () {
-        if (_formKeyRegister.currentState.validate()) {
+                },
+                color: Colors.white,
+                textColor: Colors.orangeAccent,
+                child: Text("Iniciar".toUpperCase(), style: TextStyle(fontSize: 20)),
+              );
+            }
           
-          DBProvider.db
-                      .addUser(UserModel(nombre: controllerRegister1.text,pass: controllerRegister2.text));
-
-                  final snackBar = SnackBar(
-                    duration: Duration(milliseconds: 1200),
-                    content: Text(
-                        'El usuario ${controllerRegister1.text} ha sido guardado'),
-                    action: SnackBarAction(
-                      label: 'Undo',
-                      onPressed: () {
-                        // Some code to undo the change.
-                      },
-                    ),
-                  );
-                  Scaffold.of(context).showSnackBar(snackBar);
-                  _formKeyRegister.currentState?.reset();
+            //Boton Registrarte
+            Widget _crearBotonRegis() {
+              return RaisedButton(
+                padding: EdgeInsets.only(left: 35.0, right: 35.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.orangeAccent)),
+                onPressed: () {
+                  if (_formKeyRegister.currentState.validate()) {
+                    DBProvider.db.addUser(UserModel(
+                        nombre: controllerRegister1.text,
+                        pass: controllerRegister2.text));
           
-          //Navigator.pushNamed(context, 'Menu');
-        }
-
-        setState(() {
-          controllerRegister1.clear();
-          controllerRegister2.clear();
-          controllerRegister3.clear();
+                    final snackBar = SnackBar(
+                      duration: Duration(milliseconds: 1200),
+                      content:
+                          Text('El usuario ${controllerRegister1.text} ha sido guardado'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          // Some code to undo the change.
+                        },
+                      ),
+                    );
+                    Scaffold.of(context).showSnackBar(snackBar);
+                    _formKeyRegister.currentState?.reset();
           
-        });
-      },
-      color: Colors.white,
-      textColor: Colors.orangeAccent,
-      child: Text("Aceptar".toUpperCase(), style: TextStyle(fontSize: 20)),
-
-      
-    );
-  }
-
-  Widget _googleBotton() {
-    return GoogleSignInButton(
-      onPressed: () {},
-      borderRadius: 50.0,
-    );
-  }
-
-  Widget _facebookBotton() {
-    return FacebookSignInButton(
-      onPressed: () {}, borderRadius: 50.0,
-      //  text: "FACEBOOK",
-    );
-  }
-
-  Widget _correoTexto2() {
-    return TextFormField(
-      controller: controllerRegister1,
-      validator: (value) {
-        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
-      },
-      keyboardType: TextInputType.emailAddress,
-      cursorColor: Colors.orangeAccent,
-      cursorRadius: Radius.circular(5.0),
-      cursorWidth: 3.0,
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          Icons.account_circle,
-          color: Colors.orange,
-          size: 35.0,
-        ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-        labelText: 'Correo',
-        labelStyle: estilo,
-        hintText: 'Escribe aqui',
-      ),
-    );
-  }
-
- Widget _passTexto2() {
-    return TextFormField(
-      controller: controllerRegister2,
-      validator: (value) {
-        return value.isEmpty ? 'Campos incorrectos o vacios' : null;
-      },
-      cursorColor: Colors.orangeAccent,
-      cursorRadius: Radius.circular(5.0),
-      cursorWidth: 3.0,
-      obscureText: true,
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          Icons.lock,
-          color: Colors.orange,
-          size: 35.0,
-        ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-        labelText: 'Contraseña',
-        labelStyle: estilo,
-        hintText: 'Escribe aqui',
-      ),
-    );
-  }
+                    //Navigator.pushNamed(context, 'Menu');
+                  }
+          
+                  setState(() {
+                    controllerRegister1.clear();
+                    controllerRegister2.clear();
+                    controllerRegister3.clear();
+                  });
+                },
+                color: Colors.white,
+                textColor: Colors.orangeAccent,
+                child: Text("Aceptar".toUpperCase(), style: TextStyle(fontSize: 20)),
+              );
+            }
+          
+            Widget _googleBotton() {
+              return GoogleSignInButton(
+                onPressed: () {},
+                borderRadius: 50.0,
+              );
+            }
+          
+            Widget _facebookBotton() {
+              return FacebookSignInButton(
+                onPressed: () {}, borderRadius: 50.0,
+                //  text: "FACEBOOK",
+              );
+            }
+          
+            Widget _correoTexto2() {
+              return TextFormField(
+                controller: controllerRegister1,
+                validator: (value) {
+                  return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+                },
+                keyboardType: TextInputType.emailAddress,
+                cursorColor: Colors.orangeAccent,
+                cursorRadius: Radius.circular(5.0),
+                cursorWidth: 3.0,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.account_circle,
+                    color: Colors.orange,
+                    size: 35.0,
+                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+                  labelText: 'Correo',
+                  labelStyle: estilo,
+                  hintText: 'Escribe aqui',
+                ),
+              );
+            }
+          
+            Widget _passTexto2() {
+              return TextFormField(
+                controller: controllerRegister2,
+                validator: (value) {
+                  return value.isEmpty ? 'Campos incorrectos o vacios' : null;
+                },
+                cursorColor: Colors.orangeAccent,
+                cursorRadius: Radius.circular(5.0),
+                cursorWidth: 3.0,
+                obscureText: true,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Colors.orange,
+                    size: 35.0,
+                  ),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+                  labelText: 'Contraseña',
+                  labelStyle: estilo,
+                  hintText: 'Escribe aqui',
+                ),
+              );
+            }
+          
+    
 }

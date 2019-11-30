@@ -6,15 +6,16 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
 
-
 import 'package:agenda/models/userModel.dart';
 
 class DBProvider {
   static Database _database;
   static final DBProvider db = DBProvider._private();
-  static final tab1 = 'CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR NOT NULL,pass VARCHAR NOT NULL)';
-  static final tab2 = 'CREATE TABLE eventos(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR NOT NULL,fecha VARCHAR NOT NULL,hora VARCHAR NOT NULL,descripcion VARCHAR NOT NULL,tipo VARCHAR NOT NULL)';
-  final tablas = [tab1,tab2];
+  static final tab1 =
+      'CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR NOT NULL,pass VARCHAR NOT NULL)';
+  static final tab2 =
+      'CREATE TABLE eventos(id INTEGER PRIMARY KEY AUTOINCREMENT,nombre VARCHAR NOT NULL,fecha VARCHAR NOT NULL,hora VARCHAR NOT NULL,descripcion VARCHAR NOT NULL,tipo VARCHAR NOT NULL)';
+  final tablas = [tab1, tab2];
   DBProvider._private();
 
   Future<Database> get database async {
@@ -25,8 +26,7 @@ class DBProvider {
   }
 
   initDataBase() async {
-    Directory appDirectory = await
-    getApplicationDocumentsDirectory();
+    Directory appDirectory = await getApplicationDocumentsDirectory();
     final String path = join(appDirectory.path, 'event.db');
 
     return await openDatabase(
@@ -38,7 +38,6 @@ class DBProvider {
         for (var item in tablas) {
           await db.execute(item);
         }
-        
       },
     );
   }
@@ -53,6 +52,7 @@ class DBProvider {
     final eventId = await db.insert('users', user.toMap());
     return eventId;
   }
+
   //agregar evento
   Future<int> addEvento(EventModel event) async {
     final db = await database;
@@ -75,22 +75,25 @@ class DBProvider {
   Future<EventModel> searchEventById(int id) async {
     final db = await database;
 
-    final result = await db.query('eventos', where: 'id = ?',
-        whereArgs: [id]);
+    final result = await db.query('eventos', where: 'id = ?', whereArgs: [id]);
     //final result = await db.execute('SELECT * FROM users WHERE id = $id');
 
     return result.isNotEmpty ? EventModel.fromMap(result.first) : null;
   }
 
-  Future<UserModel> searchUserByCorreo(String correo) async {
+  Future<List<EventModel>> searchUserByCorreo(String correo) async {
     final db = await database;
 
-    final result = await db.query('users', where: 'nombre = ?',
-        whereArgs: [correo]);
-    //final result = await db.execute('SELECT * FROM users WHERE id = $id');
+    final results =
+        await db.query('users', where: 'nombre = ?', whereArgs: [correo]);
 
-    return result.isNotEmpty ? UserModel.fromMap(result.first) : null;
+    List<EventModel> event = results.isNotEmpty
+        ? results.map((even) => EventModel.fromMap(even))
+        : [];
+
+    return event;
   }
+
 // Lista de eventos para el calendario Trayendolo en una lista para luego convertirlo a un DateTime
   // Future<List<UserModel>> listaeventoCalendario() async {
   //   final db = await database;
@@ -103,13 +106,11 @@ class DBProvider {
   //   return users;
   // }
 
-  
-
   Future<int> updateEvent(EventModel event) async {
     final db = await database;
 
-    final result = await db
-        .update('eventos', event.toMap(), where: 'id = ?', whereArgs: [event.id]);
+    final result = await db.update('eventos', event.toMap(),
+        where: 'id = ?', whereArgs: [event.id]);
     return result;
   }
 
