@@ -2,6 +2,10 @@ import 'package:agenda/models/eventModel.dart';
 import 'package:agenda/providers/db_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/basic.dart';
+import 'package:flutter/src/widgets/container.dart';
+
+import 'form/add_event.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 
 class SchoolList extends StatefulWidget {
@@ -17,67 +21,8 @@ class _SchoolListState extends State<SchoolList> {
 
   final primary = Color(0xff696b9e);
   final secondary = Color(0xfff29a94);
-  
-  final _editingController22 = TextEditingController();
 
-  final List<Map> schoolLists = [
-    {
-      "name": "Mi Cumpleaño",
-      "location": "15/11/2019",
-      "type": "12:00 PM",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_960_720.png"
-    },
-    {
-      "name": "Cita de Almorzar",
-      "location": "12/12/2019",
-      "type": "2:00 AM",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/31/13/14/animal-2023924_960_720.png"
-    },
-    {
-      "name": "Cita con la Vecina",
-      "location": "22/1/1999",
-      "type": "11:23 PM",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
-    },
-    {
-      "name": "Cita con la Vecina",
-      "location": "03/05/2016",
-      "type": "1:30 AM",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
-    },
-    {
-      "name": "Cita con la Vecina",
-      "location": "03/05/2016",
-      "type": "1:30 AM",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/03/16/21/18/logo-2150297_960_720.png"
-    },
-    {
-      "name": "Cita con la Vecina",
-      "location": "03/05/2016",
-      "type": "1:30 AM",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/31/13/14/animal-2023924_960_720.png"
-    },
-    {
-      "name": "Cita con la Vecina",
-      "location": "03/05/2016",
-      "type": "1:30 AM",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2016/06/09/18/36/logo-1446293_960_720.png"
-    },
-    {
-      "name": "Cita cn la Vecina",
-      "location": "03/05/2016",
-      "type": "1:30 AM",
-      "logoText":
-          "https://cdn.pixabay.com/photo/2017/01/13/01/22/rocket-1976107_960_720.png"
-    },
-  ];
+  final _editingController22 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -108,13 +53,12 @@ class _SchoolListState extends State<SchoolList> {
                 children: <Widget>[
                   //contenedor de la lista
                   Container(
-                    padding: EdgeInsets.only(top: 105),
-                    height: MediaQuery.of(context).size.height,
-                    width: double.infinity,
-                    child: ListView(
-                            children: buildList(context, snapshot.data),
-                          )
-                  ),
+                      padding: EdgeInsets.only(top: 105),
+                      height: MediaQuery.of(context).size.height,
+                      width: double.infinity,
+                      child: ListView(
+                        children: buildList(context, snapshot.data),
+                      )),
                   //contenedor del menu
                   Container(
                     margin: EdgeInsets.only(top: 1),
@@ -223,12 +167,11 @@ class _SchoolListState extends State<SchoolList> {
                                   border: InputBorder.none,
                                   contentPadding: EdgeInsets.symmetric(
                                       horizontal: 25, vertical: 13)),
-
-                                      onEditingComplete: (){
-                                         setState(() {
-                                           _editingController22.text;
-                                         });
-                                      },
+                              onEditingComplete: () {
+                                setState(() {
+                                  _editingController22.text;
+                                });
+                              },
                             ),
                           ),
                         ),
@@ -247,20 +190,25 @@ class _SchoolListState extends State<SchoolList> {
 //Listado
   List<Widget> buildList(BuildContext context, List<EventModel> event) {
     return event.map((events) {
-      var name=events.nombre;
+      var name = events.nombre;
       return Dismissible(
         key: UniqueKey(),
         background: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-             gradient: LinearGradient(
-                    colors: [Colors.redAccent, Colors.orangeAccent]),
+            gradient:
+                LinearGradient(colors: [Colors.redAccent, Colors.orangeAccent]),
           ),
-          
           child: Row(
-            
             children: <Widget>[
-              Text('Elimando Evento $name',textAlign: TextAlign.right, style: TextStyle(color: Colors.white, fontSize: 22.0),)
+              
+              Icon(Icons.delete_forever,color: Colors.white),
+              Text(
+                '$name',
+                textAlign: TextAlign.right,
+                style: TextStyle(color: Colors.white, fontSize: 22.0),
+              ),
+              Icon(Icons.delete_forever,color: Colors.white),
             ],
           ),
         ),
@@ -271,6 +219,13 @@ class _SchoolListState extends State<SchoolList> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             color: Colors.white,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 3.0,
+                  offset: Offset(0.2, 0.5),
+                  spreadRadius: 4.0)
+            ],
           ),
           width: double.infinity,
           height: 110,
@@ -279,19 +234,22 @@ class _SchoolListState extends State<SchoolList> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                width: 50,
-                height: 50,
-                margin: EdgeInsets.only(right: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  border: Border.all(width: 3, color: secondary),
-                  // image: DecorationImage(
-                  // image: CachedNetworkImageProvider(schoolLists[index]['logoText']),
-                  // fit: BoxFit.fill),
-                ),
-                //colocar algo   
-              ),
+              // Container(
+              //   width: 50,
+              //   height: 50,
+              //   margin: EdgeInsets.only(right: 15),
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(50),
+              //     border: Border.all(width: 3, color: secondary),
+              //     // image: DecorationImage(
+              //     // image: CachedNetworkImageProvider(schoolLists[index]['logoText']),
+              //     // fit: BoxFit.fill),
+              //   ),
+              //   //colocar algo
+              // ),
+               SizedBox(
+                      width: 10,
+                    ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -345,13 +303,31 @@ class _SchoolListState extends State<SchoolList> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                      // borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                      shape: BoxShape.circle,
+                      border:  Border.all(
+                        color: Colors.black12,
+                        width: 2.5,
+                      )),
+                  // color: Colors.black,
+                  child: IconButton(
+                      icon: Icon(Icons.edit, color: Colors.orangeAccent),
+                      onPressed: () {
+                        Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Eventos(id: events.id,nombre: events.nombre,fecha: events.fecha,hora: events.hora,descripcion: events.descripcion,tipo: events.tipo)), //AQUÍ ESTA EL ERROR AL PASAR EL ARGUMENTO
+                );
+                      }),
+                ),
+              ),
             ],
           ),
         ),
       );
     }).toList();
   }
-
- 
 }

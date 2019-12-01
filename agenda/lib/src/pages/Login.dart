@@ -358,7 +358,7 @@ class _LoginState extends State<Login> {
               showDialog(
                 context: context,
                 builder: (_) =>AlertDialog(
-                  title: Text('No hay datos registrados'),
+                  title: Text('Usuario incorrecto'),
                   content: Text("Registrate"),
                   actions: <Widget>[
                     
@@ -374,7 +374,7 @@ class _LoginState extends State<Login> {
                 showDialog(
                 context: context,
                 builder: (_) =>AlertDialog(
-                  title: Text('Usuario o contrasena incorrectos'),
+                  title: Text('Contraseña incorrecta'),
                   content: Text("Intenta de nuevo"),
                   actions: <Widget>[
                     
@@ -401,6 +401,7 @@ class _LoginState extends State<Login> {
           borderRadius: BorderRadius.circular(18.0),
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
+        Navigator.pushNamed(context, 'Menu');
         if (_formKeyRegister.currentState.validate()) {
           DBProvider.db.addUser(UserModel(
               nombre: controllerRegister1.text,

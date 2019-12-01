@@ -5,7 +5,14 @@ import 'package:flutter/material.dart';
 import 'Calendariosqlite.dart';
 import 'ListEvent.dart';
 import 'Perfil.dart';
+import 'form/add_event.dart';
 
+class ScreenArguments {
+  final String title;
+  final String message;
+
+  ScreenArguments(this.title, this.message);
+}
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -83,7 +90,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, 'FormEvent');
+          
+           Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Eventos()), //AQUÍ ESTA EL ERROR AL PASAR EL ARGUMENTO
+                );
           },
         ));
   }

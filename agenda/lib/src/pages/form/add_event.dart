@@ -3,9 +3,31 @@ import 'package:agenda/providers/db_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+ String valorSel;
+ String boton;
+ int id_evento;
 class Eventos extends StatefulWidget {
   @override
   _EventosState createState() => _EventosState();
+   int    id;
+  String nombre;
+  String fecha;
+  String hora;
+  String descripcion;
+  String tipo;
+  
+ 
+  Eventos({this.id, this.nombre,this.fecha,this.hora,this.descripcion,this.tipo}){
+    usernameControllerNombre.text = nombre;
+    usernameControllerTime.text = fecha;
+    usernameControllerHora.text = hora;
+    usernameControllerDesp.text = descripcion;
+    id_evento=this.id;
+    valorSel=tipo;
+    boton = this.nombre == null ? 'Agregar Evento' : 'Modificado Evento'; 
+
+
+  }
 }
 
 //final _formKey = GlobalKey<FormState>();
@@ -24,7 +46,8 @@ var _datos = ['muy importante', 'solo recordar'];
 // var _valorSel ='Evento';
 
 class _EventosState extends State<Eventos> {
-  String _valorSel;
+  
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -171,10 +194,10 @@ class _EventosState extends State<Eventos> {
       }).toList(),
       onChanged: (String valorSeleccionado) {
         setState(() {
-          this._valorSel = valorSeleccionado;
+          valorSel = valorSeleccionado;
         });
       },
-      value: _valorSel,
+      value: valorSel,
     );
   }
 
@@ -276,24 +299,27 @@ class _EventosState extends State<Eventos> {
   Widget crearBoton() {
     return RaisedButton(
       child: Text(
-        'Agregar Evento',
+        boton,
         style: TextStyle(color: Colors.white),
       ),
       color: Color.fromRGBO(255, 69, 0, 1.0),
       onPressed: () {
+
         if (_formKey.currentState.validate()) {
+          print(boton);
+          if (boton == 'Agregar Evento'){
           DBProvider.db.addEvento(EventModel(
               nombre: usernameControllerNombre.text,
               fecha: usernameControllerHora.text,
               hora: usernameControllerTime.text,
               descripcion: usernameControllerDesp.text,
-              tipo: _valorSel.toString()));
+              tipo: valorSel.toString()));
           final snackBar = SnackBar(
             duration: Duration(milliseconds: 1200),
             content: Text(
                 'Se ha creado el Evento ${usernameControllerNombre.text} ha sido guardado'),
             action: SnackBarAction(
-              label: 'Undo',
+              label: 'Registrado',
               onPressed: () {
                 // Some code to undo the change.
               },
@@ -301,6 +327,28 @@ class _EventosState extends State<Eventos> {
           );
           _formKeyScal.currentState.showSnackBar(snackBar);
           _formKey.currentState?.reset();
+        }else{
+          print("object");
+          DBProvider.db.updateEvent(EventModel(
+              id: id_evento,
+              nombre: usernameControllerNombre.text,
+              fecha: usernameControllerHora.text,
+              hora: usernameControllerTime.text,
+              descripcion: usernameControllerDesp.text,
+              tipo: valorSel.toString()));
+          final snackBar = SnackBar(
+            duration: Duration(milliseconds: 1200),
+            content: Text(
+                'Se ha creado el Evento ${usernameControllerNombre.text} ha sido guardado'),
+            action: SnackBarAction(
+              label: 'Actualizado',
+              onPressed: () {
+                // Some code to undo the change.
+              },
+            ),
+          );
+          _formKeyScal.currentState.showSnackBar(snackBar);
+        }
         }
       },
     );
