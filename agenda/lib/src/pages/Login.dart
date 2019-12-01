@@ -21,6 +21,7 @@ class _LoginState extends State<Login> {
   final controllerRegister1 = TextEditingController();
   final controllerRegister2 = TextEditingController();
   final controllerRegister3 = TextEditingController();
+  final _formKeyScal = GlobalKey<ScaffoldState>();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,27 +105,34 @@ class _LoginState extends State<Login> {
       children: <Widget>[
         gradiente,
         Positioned(
-          top: -130.0,
+          top: -80.0,
+          left: -15.0,
+          // right: 10.0,
           child: caja,
         ),
         Positioned(
           top: -40.0,
-          right: 100.0,
+          right: 150.0,
           child: caja1,
         ),
         Positioned(
-          bottom: -100.0,
-          left: 150.0,
+          bottom: -70.0,
+          left: 180.0,
           child: caja3,
         ),
         Positioned(
-          bottom: -30.0,
-          left: 130.0,
+          bottom: -35.0,
+          left: 175.0,
+          child: caja4,
+        ),
+        Positioned(
+          bottom: 100.0,
+          left: 260.0,
           child: caja4,
         ),
         Positioned(
           bottom: -50.0,
-          left: 250.0,
+          left: 300.0,
           child: caja6,
         ),
       ],
@@ -134,7 +142,7 @@ class _LoginState extends State<Login> {
   //formulario de inicio de secion
   Widget _formulario() {
     final contenedor = Container(
-        margin: EdgeInsets.only(top: 20.0, left: 15.0),
+        margin: EdgeInsets.only(top: 110.0, left: 40.0),
         padding: EdgeInsets.only(right: 10.0, left: 10.0),
         width: 330.0,
         height: 500.0,
@@ -200,7 +208,7 @@ class _LoginState extends State<Login> {
   //formulario de registro
   Widget _formularioRegistro() {
     final contenedor = Container(
-        margin: EdgeInsets.only(top: 20.0, left: 15.0, bottom: 30.0),
+        margin: EdgeInsets.only(top: 20.0, left: 40.0, bottom: 110.0),
         padding: EdgeInsets.only(right: 10.0, left: 10.0),
         width: 330.0,
         height: 500.0,
@@ -345,7 +353,38 @@ class _LoginState extends State<Login> {
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
         if (_formKeyLogin.currentState.validate()) {
-          Navigator.pushNamed(context, 'Menu');
+          DBProvider.db.searchUserByCorreo(controllerLoginc1.text).then((res) {
+            if (res.length == 0) {
+              showDialog(
+                context: context,
+                builder: (_) =>AlertDialog(
+                  title: Text('No hay datos registrados'),
+                  content: Text("Registrate"),
+                  actions: <Widget>[
+                    
+                  ],
+                ),
+                barrierDismissible: true,
+              );
+            } else {
+              if (controllerLoginc1.text == res[0].nombre &&
+                  controllerLoginc2.text == res[0].pass) {
+                Navigator.pushNamed(context, 'Menu');
+              } else {
+                showDialog(
+                context: context,
+                builder: (_) =>AlertDialog(
+                  title: Text('Usuario o contrasena incorrectos'),
+                  content: Text("Intenta de nuevo"),
+                  actions: <Widget>[
+                    
+                  ],
+                ),
+                barrierDismissible: true,
+              );
+              }
+            }
+          });
         }
       },
       color: Colors.white,
@@ -378,17 +417,9 @@ class _LoginState extends State<Login> {
               },
             ),
           );
-          Scaffold.of(context).showSnackBar(snackBar);
+          _formKeyScal.currentState.showSnackBar(snackBar);
           _formKeyRegister.currentState?.reset();
-
-          Navigator.pushNamed(context, 'Menu');
         }
-
-        setState(() {
-          controllerRegister1.clear();
-          controllerRegister2.clear();
-          controllerRegister3.clear();
-        });
       },
       color: Colors.white,
       textColor: Colors.orangeAccent,

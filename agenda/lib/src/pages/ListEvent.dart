@@ -17,6 +17,8 @@ class _SchoolListState extends State<SchoolList> {
 
   final primary = Color(0xff696b9e);
   final secondary = Color(0xfff29a94);
+  
+  final _editingController22 = TextEditingController();
 
   final List<Map> schoolLists = [
     {
@@ -80,7 +82,7 @@ class _SchoolListState extends State<SchoolList> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<EventModel>>(
-      future: DBProvider.db.listaEvento(),
+      future: DBProvider.db.buquedaEvent(_editingController22.text),
       builder:
           (BuildContext context, AsyncSnapshot<List<EventModel>> snapshot) {
         if (!snapshot.hasData) {
@@ -88,7 +90,7 @@ class _SchoolListState extends State<SchoolList> {
             child: CircularProgressIndicator(),
           );
         }
-        if (snapshot.data == 0) {
+        if (snapshot.hasData == null) {
           return Center(
             child: Text(
               'No hay usuarios registrados',
@@ -205,7 +207,7 @@ class _SchoolListState extends State<SchoolList> {
                             elevation: 5.0,
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                             child: TextField(
-                              // controller: TextEditingController(text: locations[0]),
+                              controller: _editingController22,
                               cursorColor: Theme.of(context).primaryColor,
                               style: dropdownMenuItem,
                               decoration: InputDecoration(
@@ -221,6 +223,12 @@ class _SchoolListState extends State<SchoolList> {
                                   border: InputBorder.none,
                                   contentPadding: EdgeInsets.symmetric(
                                       horizontal: 25, vertical: 13)),
+
+                                      onEditingComplete: (){
+                                         setState(() {
+                                           _editingController22.text;
+                                         });
+                                      },
                             ),
                           ),
                         ),
@@ -239,6 +247,7 @@ class _SchoolListState extends State<SchoolList> {
 //Listado
   List<Widget> buildList(BuildContext context, List<EventModel> event) {
     return event.map((events) {
+      var name=events.nombre;
       return Dismissible(
         key: UniqueKey(),
         background: Container(
@@ -246,6 +255,13 @@ class _SchoolListState extends State<SchoolList> {
             borderRadius: BorderRadius.circular(25),
              gradient: LinearGradient(
                     colors: [Colors.redAccent, Colors.orangeAccent]),
+          ),
+          
+          child: Row(
+            
+            children: <Widget>[
+              Text('Elimando Evento $name',textAlign: TextAlign.right, style: TextStyle(color: Colors.white, fontSize: 22.0),)
+            ],
           ),
         ),
         onDismissed: (direction) {
@@ -336,4 +352,6 @@ class _SchoolListState extends State<SchoolList> {
       );
     }).toList();
   }
+
+ 
 }

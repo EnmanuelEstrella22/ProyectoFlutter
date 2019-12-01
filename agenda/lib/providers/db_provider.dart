@@ -60,6 +60,8 @@ class DBProvider {
     return userId;
   }
 
+
+
   //listar eventos
   Future<List<EventModel>> listaEvento() async {
     final db = await database;
@@ -81,17 +83,30 @@ class DBProvider {
     return result.isNotEmpty ? EventModel.fromMap(result.first) : null;
   }
 
-  Future<List<EventModel>> searchUserByCorreo(String correo) async {
+  Future<List<UserModel>> searchUserByCorreo(String correo) async {
     final db = await database;
 
     final results =
         await db.query('users', where: 'nombre = ?', whereArgs: [correo]);
 
-    List<EventModel> event = results.isNotEmpty
-        ? results.map((even) => EventModel.fromMap(even))
+    List<UserModel> ususarios = results.isNotEmpty
+        ? results.map((user) => UserModel.fromMap(user)).toList()
         : [];
 
-    return event;
+    return ususarios;
+  }
+
+  Future<List<EventModel>> buquedaEvent(String bus) async {
+    final db = await database;
+
+    final results =
+        await db.rawQuery("select distinct * from eventos where nombre like '%$bus%' or fecha like '%$bus%' ");
+
+    List<EventModel> ususarios = results.isNotEmpty
+        ? results.map((user) => EventModel.fromMap(user)).toList()
+        : [];
+
+    return ususarios;
   }
 
 // Lista de eventos para el calendario Trayendolo en una lista para luego convertirlo a un DateTime

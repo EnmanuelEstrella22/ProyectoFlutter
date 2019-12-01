@@ -15,6 +15,8 @@ final usernameControllerDesp = TextEditingController();
 final usernameControllerTime = TextEditingController();
 final TextStyle estilo = new TextStyle(fontSize: 20.0);
 final _formKey = GlobalKey<FormState>();
+final _formKeyScal = GlobalKey<ScaffoldState>();
+
 String _fecha = '';
 String _alert = '';
 
@@ -23,20 +25,17 @@ var _datos = ['muy importante', 'solo recordar'];
 
 class _EventosState extends State<Eventos> {
   String _valorSel;
-  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      key: _formKeyScal,
       //floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       floatingActionButton: floatb(),
       body: Stack(
         children: <Widget>[
-          
           _crearfondo(context),
           _formulario(context),
-          
         ],
       ),
     );
@@ -125,12 +124,12 @@ class _EventosState extends State<Eventos> {
 
   _selectHora(BuildContext context) async {
     TimeOfDay selectedTime = await showTimePicker(
-     initialTime: TimeOfDay.fromDateTime(DateTime.now()),
+      initialTime: TimeOfDay.fromDateTime(DateTime.now()),
       context: context,
     );
     if (selectedTime != null) {
       setState(() {
-        usernameControllerTime.text=selectedTime.format(context);
+        usernameControllerTime.text = selectedTime.format(context);
         //  selectedTime.hour.toString() +
         //     selectedTime.minute.toString() +
         //     selectedTime.hourOfPeriod.toString();
@@ -283,61 +282,53 @@ class _EventosState extends State<Eventos> {
       color: Color.fromRGBO(255, 69, 0, 1.0),
       onPressed: () {
         if (_formKey.currentState.validate()) {
-          DBProvider.db
-                  .addEvento(EventModel(nombre: usernameControllerNombre.text,fecha: usernameControllerHora.text,
-                  hora: usernameControllerTime.text,descripcion: usernameControllerDesp.text,
-                  tipo: _valorSel.toString()));
-                  final snackBar = SnackBar(
-                    duration: Duration(milliseconds: 1200),
-                    content: Text(
-                        'El usuario ${usernameControllerNombre.text} ha sido guardado'),
-                    action: SnackBarAction(
-                      label: 'Undo',
-                      onPressed: () {
-
-                        
-                        
-                        // Some code to undo the change.
-                      },
-                    ),
-                  );
-                  Scaffold.of(context).showSnackBar(snackBar);
-                  _formKey.currentState?.reset(); 
-                      
-        }
-
-                  
-                  setState(() {
-                    cleanText();
-                  });
-              },
-            );
-          }
-        
-          Widget floatb() {
-            return FloatingActionButton(
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                child: Icon(Icons.arrow_back),
-                decoration: BoxDecoration(
-                  gradient:
-                      LinearGradient(colors: [Colors.redAccent, Colors.orangeAccent]),
-                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                ),
-              ),
+          DBProvider.db.addEvento(EventModel(
+              nombre: usernameControllerNombre.text,
+              fecha: usernameControllerHora.text,
+              hora: usernameControllerTime.text,
+              descripcion: usernameControllerDesp.text,
+              tipo: _valorSel.toString()));
+          final snackBar = SnackBar(
+            duration: Duration(milliseconds: 1200),
+            content: Text(
+                'Se ha creado el Evento ${usernameControllerNombre.text} ha sido guardado'),
+            action: SnackBarAction(
+              label: 'Undo',
               onPressed: () {
-                Navigator.pop(context);
-                cleanText();
+                // Some code to undo the change.
               },
-            );
-          }
-        
-          void cleanText() {
-            usernameControllerDesp.clear();
-            usernameControllerNombre.clear();
-            usernameControllerHora.clear();
-            usernameControllerTime.clear();
-          
-          }
+            ),
+          );
+          _formKeyScal.currentState.showSnackBar(snackBar);
+          _formKey.currentState?.reset();
+        }
+      },
+    );
+  }
+
+  Widget floatb() {
+    return FloatingActionButton(
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Icon(Icons.arrow_back),
+        decoration: BoxDecoration(
+          gradient:
+              LinearGradient(colors: [Colors.redAccent, Colors.orangeAccent]),
+          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+        ),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+        cleanText();
+      },
+    );
+  }
+
+  void cleanText() {
+    usernameControllerDesp.clear();
+    usernameControllerNombre.clear();
+    usernameControllerHora.clear();
+    usernameControllerTime.clear();
+  }
 }
