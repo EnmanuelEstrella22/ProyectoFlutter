@@ -354,16 +354,24 @@ class _LoginState extends State<Login> {
       onPressed: () {
         if (_formKeyLogin.currentState.validate()) {
           DBProvider.db.searchUserByCorreo(controllerLoginc1.text).then((res) {
+            print(res);
             if (res.length == 0) {
               showDialog(
                 context: context,
-                builder: (_) =>AlertDialog(
-                  title: Text('Usuario incorrecto'),
-                  content: Text("Registrate"),
-                  actions: <Widget>[
-                    
-                  ],
-                ),
+                builder: (_) => AlertDialog(
+                      title: Text('Usuario incorrecto'),
+                      content: Text("Registrate"),
+                      actions: <Widget>[
+                        RaisedButton(
+                            child: Text(
+                              "CERRAR",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            })
+                      ],
+                    ),
                 barrierDismissible: true,
               );
             } else {
@@ -372,16 +380,23 @@ class _LoginState extends State<Login> {
                 Navigator.pushNamed(context, 'Menu');
               } else {
                 showDialog(
-                context: context,
-                builder: (_) =>AlertDialog(
-                  title: Text('Contraseña incorrecta'),
-                  content: Text("Intenta de nuevo"),
-                  actions: <Widget>[
-                    
-                  ],
-                ),
-                barrierDismissible: true,
-              );
+                  context: context,
+                  builder: (_) => AlertDialog(
+                        title: Text('Contraseña incorrecta'),
+                        content: Text("Intenta de nuevo"),
+                        actions: <Widget>[
+                          RaisedButton(
+                              child: Text(
+                                "CERRAR",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              })
+                        ],
+                      ),
+                  barrierDismissible: true,
+                );
               }
             }
           });
@@ -401,25 +416,31 @@ class _LoginState extends State<Login> {
           borderRadius: BorderRadius.circular(18.0),
           side: BorderSide(color: Colors.orangeAccent)),
       onPressed: () {
-        Navigator.pushNamed(context, 'Menu');
         if (_formKeyRegister.currentState.validate()) {
           DBProvider.db.addUser(UserModel(
               nombre: controllerRegister1.text,
               pass: controllerRegister2.text));
-
-          final snackBar = SnackBar(
-            duration: Duration(milliseconds: 1200),
-            content:
-                Text('El usuario ${controllerRegister1.text} ha sido guardado'),
-            action: SnackBarAction(
-              label: 'Undo',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
+              Navigator.pushNamed(context, 'Menu');
+          controllerRegister1.text = "";
+          controllerRegister2.text = "";
+          controllerRegister3.text = "";
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+                  title: Text('Usuario Registrado'),
+                  actions: <Widget>[
+                    RaisedButton(
+                        child: Text(
+                          "CERRAR",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        })
+                  ],
+                ),
+            barrierDismissible: true,
           );
-          _formKeyScal.currentState.showSnackBar(snackBar);
-          _formKeyRegister.currentState?.reset();
         }
       },
       color: Colors.white,

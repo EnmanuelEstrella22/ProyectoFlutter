@@ -200,15 +200,16 @@ class _SchoolListState extends State<SchoolList> {
                 LinearGradient(colors: [Colors.redAccent, Colors.orangeAccent]),
           ),
           child: Row(
+            mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+           
             children: <Widget>[
-              
-              Icon(Icons.delete_forever,color: Colors.white),
+              Icon(Icons.delete_forever,size: 50.0,color: Colors.white),
               Text(
                 '$name',
                 textAlign: TextAlign.right,
                 style: TextStyle(color: Colors.white, fontSize: 22.0),
               ),
-              Icon(Icons.delete_forever,color: Colors.white),
+              Icon(Icons.delete_forever,size: 50.0,color: Colors.white),
             ],
           ),
         ),

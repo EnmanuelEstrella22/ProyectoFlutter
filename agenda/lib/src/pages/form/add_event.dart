@@ -3,30 +3,34 @@ import 'package:agenda/providers/db_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
- String valorSel;
- String boton;
- int id_evento;
+String valorSel;
+String boton;
+int id_evento;
+
 class Eventos extends StatefulWidget {
   @override
   _EventosState createState() => _EventosState();
-   int    id;
+  int id;
   String nombre;
   String fecha;
   String hora;
   String descripcion;
   String tipo;
-  
- 
-  Eventos({this.id, this.nombre,this.fecha,this.hora,this.descripcion,this.tipo}){
+
+  Eventos(
+      {this.id,
+      this.nombre,
+      this.fecha,
+      this.hora,
+      this.descripcion,
+      this.tipo}) {
     usernameControllerNombre.text = nombre;
     usernameControllerTime.text = fecha;
     usernameControllerHora.text = hora;
     usernameControllerDesp.text = descripcion;
-    id_evento=this.id;
-    valorSel=tipo;
-    boton = this.nombre == null ? 'Agregar Evento' : 'Modificado Evento'; 
-
-
+    id_evento = this.id;
+    valorSel = tipo;
+    boton = this.nombre == null ? 'Agregar Evento' : 'Modificado Evento';
   }
 }
 
@@ -46,9 +50,6 @@ var _datos = ['muy importante', 'solo recordar'];
 // var _valorSel ='Evento';
 
 class _EventosState extends State<Eventos> {
-  
- 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -304,51 +305,63 @@ class _EventosState extends State<Eventos> {
       ),
       color: Color.fromRGBO(255, 69, 0, 1.0),
       onPressed: () {
-
         if (_formKey.currentState.validate()) {
           print(boton);
-          if (boton == 'Agregar Evento'){
-          DBProvider.db.addEvento(EventModel(
-              nombre: usernameControllerNombre.text,
-              fecha: usernameControllerHora.text,
-              hora: usernameControllerTime.text,
-              descripcion: usernameControllerDesp.text,
-              tipo: valorSel.toString()));
-          final snackBar = SnackBar(
-            duration: Duration(milliseconds: 1200),
-            content: Text(
-                'Se ha creado el Evento ${usernameControllerNombre.text} ha sido guardado'),
-            action: SnackBarAction(
-              label: 'Registrado',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
-          );
-          _formKeyScal.currentState.showSnackBar(snackBar);
-          _formKey.currentState?.reset();
-        }else{
-          print("object");
-          DBProvider.db.updateEvent(EventModel(
-              id: id_evento,
-              nombre: usernameControllerNombre.text,
-              fecha: usernameControllerHora.text,
-              hora: usernameControllerTime.text,
-              descripcion: usernameControllerDesp.text,
-              tipo: valorSel.toString()));
-          final snackBar = SnackBar(
-            duration: Duration(milliseconds: 1200),
-            content: Text(
-                'Se ha creado el Evento ${usernameControllerNombre.text} ha sido guardado'),
-            action: SnackBarAction(
-              label: 'Actualizado',
-              onPressed: () {
-                // Some code to undo the change.
-              },
-            ),
-          );
-          _formKeyScal.currentState.showSnackBar(snackBar);
-        }
+          if (boton == 'Agregar Evento') {
+            DBProvider.db.addEvento(EventModel(
+                nombre: usernameControllerNombre.text,
+                fecha: usernameControllerHora.text,
+                hora: usernameControllerTime.text,
+                descripcion: usernameControllerDesp.text,
+                tipo: valorSel.toString()));
+            showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                    title: Text('Evento Registrado'),
+                    actions: <Widget>[
+                      RaisedButton(
+                          child: Text(
+                            "CERRAR",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          })
+                    ],
+                  ),
+              barrierDismissible: true,
+            );
+             usernameControllerNombre.text = "";
+             usernameControllerHora.text = "";
+             usernameControllerTime.text = "";
+             usernameControllerDesp.text = "";
+             valorSel = "";
+          } else {
+            DBProvider.db.updateEvent(EventModel(
+                id: id_evento,
+                nombre: usernameControllerNombre.text,
+                fecha: usernameControllerHora.text,
+                hora: usernameControllerTime.text,
+                descripcion: usernameControllerDesp.text,
+                tipo: valorSel.toString()));
+            showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                    title: Text('Evento Actualizado'),
+                    actions: <Widget>[
+                      RaisedButton(
+                          child: Text(
+                            "CERRAR",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          })
+                    ],
+                  ),
+              barrierDismissible: true,
+            );
+          }
         }
       },
     );
