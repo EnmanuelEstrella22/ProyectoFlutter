@@ -25,8 +25,8 @@ class Eventos extends StatefulWidget {
       this.descripcion,
       this.tipo}) {
     usernameControllerNombre.text = nombre;
-    usernameControllerTime.text = fecha;
-    usernameControllerHora.text = hora;
+    usernameControllerTime.text = hora;
+    usernameControllerHora.text = fecha;
     usernameControllerDesp.text = descripcion;
     id_evento = this.id;
     valorSel = tipo;
@@ -341,7 +341,7 @@ class _EventosState extends State<Eventos> {
                 id: id_evento,
                 nombre: usernameControllerNombre.text,
                 fecha: usernameControllerHora.text,
-                hora: usernameControllerTime.text,
+                hora:  usernameControllerTime.text,
                 descripcion: usernameControllerDesp.text,
                 tipo: valorSel.toString()));
             showDialog(
